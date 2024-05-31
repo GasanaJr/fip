@@ -253,3 +253,59 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 }
+
+class AuthScreen extends StatelessWidget {
+  const AuthScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Login Screen"),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              margin: const EdgeInsets.only(bottom: 20),
+              child: Text(
+                "Welcome to FIP! Log in to continue",
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
+            TextField(
+              decoration: InputDecoration(
+                  labelText: "Username", border: OutlineInputBorder()),
+            ),
+            SizedBox(
+              height: 16,
+            ),
+            TextField(
+              decoration: InputDecoration(
+                  labelText: "Password", border: OutlineInputBorder()),
+            ),
+            SizedBox(
+              height: 16,
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => HomeScreen()));
+                },
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStatePropertyAll<Color>(Colors.blueGrey),
+                    foregroundColor:
+                        MaterialStatePropertyAll<Color>(Colors.white),
+                    textStyle: MaterialStatePropertyAll<TextStyle>(
+                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                    minimumSize: MaterialStatePropertyAll<Size>(Size(150, 50))),
+                child: Text("Log In"))
+          ],
+        ),
+      ),
+    );
+  }
+}

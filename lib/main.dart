@@ -98,5 +98,31 @@ class ReportScreen extends StatelessWidget {
   }
 }
 
+class IssuesScreen extends StatelessWidget {
+  final List<String> issues = [
+    'Pothole on Main St',
+    'Broken Streetlight',
+    'Graffiti on Wall'
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Reported Issues'),
+      ),
+      body: ListView.builder(
+        itemCount: issues.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Text(issues[index]),
+            trailing: Icon(Icons.check_circle),
+          );
+        },
+      ),
+    );
+  }
+}
+
 
 

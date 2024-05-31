@@ -142,7 +142,9 @@ class IssuesScreen extends StatelessWidget {
   final List<String> issues = [
     'Pothole on Main St',
     'Broken Streetlight',
-    'Graffiti on Wall'
+    'Graffiti on Wall',
+    'missing stop sign',
+    'faulty CCTV camera'
   ];
 
   @override

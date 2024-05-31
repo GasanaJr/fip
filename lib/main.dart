@@ -10,7 +10,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: HomeScreen(),
+      debugShowCheckedModeBanner: false,
+      home: AuthScreen(),
     );
   }
 }
@@ -139,6 +140,7 @@ class ReportScreen extends StatelessWidget {
 }
 
 class IssuesScreen extends StatelessWidget {
+  IssuesScreen({super.key});
   final List<String> issues = [
     'Pothole on Main St',
     'Broken Streetlight',

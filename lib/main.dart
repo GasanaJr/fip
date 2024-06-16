@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:infra/routes/routes.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,7 +12,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: AuthScreen(),
+      home: HomeScreen(),
+      routes: routes,
     );
   }
 }
@@ -51,7 +53,8 @@ class _HomeScreenState extends State<HomeScreen> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.report), label: 'Report'),
-          BottomNavigationBarItem(icon: Icon(Icons.person_2_rounded), label: 'Profile'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.person_2_rounded), label: 'Profile'),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.amber[800],
@@ -59,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Add new issue
+          Navigator.pushNamed(context, '/login');
         },
         child: Icon(Icons.add),
       ),
@@ -196,13 +199,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
             children: [
               CircleAvatar(
                 radius: 50,
-                backgroundImage: AssetImage('profile_picture.avif'), // Add your profile picture here
+                backgroundImage: AssetImage(
+                    'profile_picture.avif'), // Add your profile picture here
               ),
               SizedBox(height: 16),
               _isUpdated
                   ? Text(
                       'First Name: ${_firstNameController.text}',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     )
                   : TextField(
                       controller: _firstNameController,
@@ -215,7 +220,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               _isUpdated
                   ? Text(
                       'Last Name: ${_lastNameController.text}',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     )
                   : TextField(
                       controller: _lastNameController,
@@ -228,7 +234,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               _isUpdated
                   ? Text(
                       'Location: ${_locationController.text}',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     )
                   : TextField(
                       controller: _locationController,
@@ -248,62 +255,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class AuthScreen extends StatelessWidget {
-  const AuthScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Login Screen"),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              margin: const EdgeInsets.only(bottom: 20),
-              child: Text(
-                "Welcome to FIP! Log in to continue",
-                style: TextStyle(fontSize: 20),
-              ),
-            ),
-            TextField(
-              decoration: InputDecoration(
-                  labelText: "Username", border: OutlineInputBorder()),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            TextField(
-              decoration: InputDecoration(
-                  labelText: "Password", border: OutlineInputBorder()),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => HomeScreen()));
-                },
-                style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStatePropertyAll<Color>(Colors.blueGrey),
-                    foregroundColor:
-                        MaterialStatePropertyAll<Color>(Colors.white),
-                    textStyle: MaterialStatePropertyAll<TextStyle>(
-                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                    minimumSize: MaterialStatePropertyAll<Size>(Size(150, 50))),
-                child: Text("Log In"))
-          ],
         ),
       ),
     );

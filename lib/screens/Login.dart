@@ -1,4 +1,5 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class AuthScreen extends StatelessWidget {
@@ -143,13 +144,29 @@ class AuthScreen extends StatelessWidget {
                                               Size(150, 50))),
                                   child: Text("Log In")),
                             ),
-                            Text(
-                              "Forgot your password? click here",
-                              style: TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            )
+                            RichText(
+                                text: TextSpan(
+                                    text: "Forgot your Password? ",
+                                    style: TextStyle(
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black),
+                                    children: <TextSpan>[
+                                  TextSpan(
+                                      text: 'Click here',
+                                      style: TextStyle(
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.blue,
+                                        decoration: TextDecoration.underline,
+                                      ),
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () {
+                                          // Navigator.of(context).pushReplacementNamed('/report');
+                                          Navigator.pushNamed(
+                                              context, '/report');
+                                        })
+                                ]))
                           ],
                         ),
                       )

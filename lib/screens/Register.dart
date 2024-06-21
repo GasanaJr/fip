@@ -26,13 +26,6 @@ class RegisterScreen extends StatelessWidget {
             ),
           ),
           backgroundColor: Color.fromARGB(255, 11, 28, 37),
-          actions: [
-            Icon(
-              Icons.login,
-              color: Colors.white,
-              size: 35,
-            )
-          ],
         ),
       ),
       body: ListView(

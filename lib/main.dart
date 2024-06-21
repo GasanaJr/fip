@@ -3,6 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:infra/routes/routes.dart';
 import 'package:infra/screens/SplashScreen.dart';
+import 'package:infra/screens/ReportScreen.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 void main() => runApp(MyApp());
 
@@ -82,10 +85,7 @@ class HomeContent extends StatelessWidget {
         Text('Welcome to FIP App'),
         ElevatedButton(
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ReportScreen()),
-            );
+            Navigator.pushNamed(context, '/report');
           },
           child: Text('Report an Issue'),
         ),
@@ -103,45 +103,7 @@ class HomeContent extends StatelessWidget {
   }
 }
 
-class ReportScreen extends StatelessWidget {
-  const ReportScreen({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Report an Issue'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            TextField(
-              decoration: InputDecoration(
-                labelText: 'Issue Title',
-                border: OutlineInputBorder(),
-              ),
-            ),
-            SizedBox(height: 16),
-            TextField(
-              decoration: InputDecoration(
-                labelText: 'Description',
-                border: OutlineInputBorder(),
-              ),
-            ),
-            SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () {
-                // Submit issue
-              },
-              child: Text('Submit'),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
 
 class IssuesScreen extends StatelessWidget {
   IssuesScreen({super.key});

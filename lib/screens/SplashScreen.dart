@@ -20,14 +20,14 @@ class _SplashScreenState extends State<SplashScreen>
     Future.delayed(
         Duration(seconds: 3),
         () => {
-              Navigator.of(context).pushReplacementNamed('/register'),
+              Navigator.of(context).pushReplacementNamed('/onboard'),
             });
   }
 
   @override
   void dispose() {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-        overlays: SystemUiOverlay.values);
+    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+    //     overlays: SystemUiOverlay.values);
     super.dispose();
   }
 

@@ -1,11 +1,9 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
 import 'package:infra/routes/routes.dart';
 import 'package:infra/screens/SplashScreen.dart';
 import 'package:infra/screens/ReportScreen.dart';
-import 'package:image_picker/image_picker.dart';
-import 'dart:io';
 
 void main() => runApp(MyApp());
 
@@ -102,8 +100,6 @@ class HomeContent extends StatelessWidget {
     );
   }
 }
-
-
 
 class IssuesScreen extends StatelessWidget {
   IssuesScreen({super.key});

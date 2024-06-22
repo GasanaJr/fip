@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       create: (context) => ReportedIssuesModel(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: HomeContent(),
+        home: SplashScreen(),
         routes: routes,
       ),
     );
@@ -51,8 +51,50 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('FIP App'),
+            appBar: PreferredSize(
+        preferredSize: Size.fromHeight(70),
+        child: AppBar(
+          backgroundColor: Color(0xFF143342),
+          title: Text(""),
+          leading: IconButton(
+            icon: Icon(
+              Icons.menu,
+              color: Colors.white,
+              size: 30,
+            ),
+            onPressed: () {
+              // Define your onPressed action here
+            },
+          ),
+          actions: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton(
+                  icon: Icon(
+                    Icons.person,
+                    color: Colors.white,
+                    size: 30,
+                  ),
+                  onPressed: () {
+                    // Define your onPressed action here
+                  },
+                ),
+                SizedBox(width: 16), // Add space between icons
+                IconButton(
+                  icon: Icon(
+                    Icons.notifications,
+                    color: Colors.white,
+                    size: 30,
+                  ),
+                  onPressed: () {
+                    // Define your onPressed action here
+                  },
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
@@ -67,12 +109,6 @@ class _HomeScreenState extends State<HomeScreen> {
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.amber[800],
         onTap: _onItemTapped,
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, '/login');
-        },
-        child: Icon(Icons.add),
       ),
     );
   }
@@ -123,9 +159,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Profile'),
-      ),
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(16.0),

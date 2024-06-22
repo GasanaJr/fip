@@ -12,184 +12,190 @@ class HomeContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Greeting
-            SizedBox(
-              height: 48,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
-              child: Text(
-                "Welcome, Junior",
-                style: TextStyle(fontSize: 24),
-              ),
-            ),
-            // Let's Ensure Road safety
-            SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
-              child: Text(
-                "Let's find a safe route for you",
-                style: GoogleFonts.notoSerif(
-                    fontSize: 36, fontWeight: FontWeight.bold),
-              ),
-            ),
-            // Divider
-            SizedBox(
-              height: 24,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Divider(),
-            ),
-
-            SizedBox(
-              height: 10,
-            ),
-
-            // Quick Actions
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Quick Actions",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+      body: ListView(
+        children: [
+          SafeArea(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Greeting
+                SizedBox(
+                  height: 30,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                  child: Text(
+                    "Welcome, Junior",
+                    style: TextStyle(fontSize: 24),
                   ),
-                  SizedBox(
-                    height: 30,
+                ),
+                // Let's Ensure Road safety
+                SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                  child: Text(
+                    "Let's find a safe route for you",
+                    style: GoogleFonts.notoSerif(
+                        fontSize: 36, fontWeight: FontWeight.bold),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                ),
+                // Divider
+                SizedBox(
+                  height: 24,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Divider(),
+                ),
+
+                SizedBox(
+                  height: 10,
+                ),
+
+                // Quick Actions
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Column(
-                        children: [
-                          Container(
-                            width: 60,
-                            height: 60,
-                            decoration: BoxDecoration(
-                                color: Color(0xFF143342),
-                                borderRadius: BorderRadius.circular(35)),
-                            child: IconButton(
-                                onPressed: () {},
-                                icon: Icon(
-                                  Icons.add,
-                                  color: Colors.white,
-                                )),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            "Add an Issue",
-                            style: TextStyle(fontSize: 17),
-                          )
-                        ],
+                      Text(
+                        "Quick Actions",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
-                      Column(
-                        children: [
-                          Container(
-                            width: 60,
-                            height: 60,
-                            decoration: BoxDecoration(
-                                color: Color(0xFF143342),
-                                borderRadius: BorderRadius.circular(35)),
-                            child: IconButton(
-                                onPressed: () {},
-                                icon: Icon(
-                                  Icons.remove_red_eye,
-                                  color: Colors.white,
-                                )),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            "View Issues",
-                            style: TextStyle(fontSize: 17),
-                          )
-                        ],
+                      SizedBox(
+                        height: 30,
                       ),
-                      Column(
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Container(
-                            width: 60,
-                            height: 60,
-                            decoration: BoxDecoration(
-                                color: Color(0xFF143342),
-                                borderRadius: BorderRadius.circular(35)),
-                            child: IconButton(
-                                onPressed: () {},
-                                icon: Icon(
-                                  Icons.feedback,
-                                  color: Colors.white,
-                                )),
+                          Column(
+                            children: [
+                              Container(
+                                width: 60,
+                                height: 60,
+                                decoration: BoxDecoration(
+                                    color: Color(0xFF143342),
+                                    borderRadius: BorderRadius.circular(35)),
+                                child: IconButton(
+                                    onPressed: () {},
+                                    icon: Icon(
+                                      Icons.add,
+                                      color: Colors.white,
+                                    )),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                "Add an Issue",
+                                style: TextStyle(fontSize: 17),
+                              )
+                            ],
                           ),
-                          SizedBox(
-                            height: 10,
+                          Column(
+                            children: [
+                              Container(
+                                width: 60,
+                                height: 60,
+                                decoration: BoxDecoration(
+                                    color: Color(0xFF143342),
+                                    borderRadius: BorderRadius.circular(35)),
+                                child: IconButton(
+                                    onPressed: () {},
+                                    icon: Icon(
+                                      Icons.remove_red_eye,
+                                      color: Colors.white,
+                                    )),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                "View Issues",
+                                style: TextStyle(fontSize: 17),
+                              )
+                            ],
                           ),
-                          Text(
-                            "Take Survey",
-                            style: TextStyle(fontSize: 17),
+                          Column(
+                            children: [
+                              Container(
+                                width: 60,
+                                height: 60,
+                                decoration: BoxDecoration(
+                                    color: Color(0xFF143342),
+                                    borderRadius: BorderRadius.circular(35)),
+                                child: IconButton(
+                                    onPressed: () {},
+                                    icon: Icon(
+                                      Icons.feedback,
+                                      color: Colors.white,
+                                    )),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                "Take Survey",
+                                style: TextStyle(fontSize: 17),
+                              )
+                            ],
                           )
                         ],
                       )
                     ],
-                  )
-                ],
-              ),
-            ),
+                  ),
+                ),
 
-            // Reported Issues
+                // Reported Issues
 
-            SizedBox(
-              height: 30,
-            ),
+                SizedBox(
+                  height: 30,
+                ),
 
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
-              child: Text(
-                "Reported Issues",
-                style: TextStyle(fontSize: 20),
-              ),
-            ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                  child: Text(
+                    "Reported Issues",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ),
 
-            Expanded(
-              child: Consumer<ReportedIssuesModel>(
-                builder: (context, value, child) {
-                  return SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Container(
-                      width: MediaQuery.of(context).size.width * 1.5,
-                      child: GridView.builder(
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemCount: value.reportedItems.length,
-                        padding: EdgeInsets.all(12),
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          childAspectRatio: 1 / 0.9,
+                Expanded(
+                  child: Consumer<ReportedIssuesModel>(
+                    builder: (context, value, child) {
+                      return SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 1.5,
+                          child: GridView.builder(
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount: value.reportedItems.length,
+                            padding: EdgeInsets.all(12),
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              childAspectRatio: 1 / 0.9,
+                            ),
+                            itemBuilder: (context, index) {
+                              return ReportedIssueTile(
+                                Location: value.reportedItems[index][0],
+                                Description: value.reportedItems[index][1],
+                              );
+                            },
+                          ),
                         ),
-                        itemBuilder: (context, index) {
-                          return ReportedIssueTile(
-                            Location: value.reportedItems[index][0],
-                            Description: value.reportedItems[index][1],
-                          );
-                        },
-                      ),
-                    ),
-                  );
-                },
-              ),
-            )
-          ],
-        ),
+                      );
+                    },
+                  ),
+                )
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

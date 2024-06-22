@@ -124,7 +124,7 @@ class AuthScreen extends StatelessWidget {
                                     top: 20.0, bottom: 20),
                                 child: ElevatedButton(
                                     onPressed: () {
-                                      Navigator.pushNamed(context, '/home');
+                                      Navigator.pushReplacementNamed(context, '/home');
                                     },
                                     style: ButtonStyle(
                                         backgroundColor:

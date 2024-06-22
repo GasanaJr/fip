@@ -1,9 +1,12 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
+import 'package:infra/models/ReportedIssuesModel.dart';
 import 'package:infra/routes/routes.dart';
+import 'package:infra/screens/HomeScreen.dart';
 import 'package:infra/screens/SplashScreen.dart';
 import 'package:infra/screens/ReportScreen.dart';
+import 'package:provider/provider.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,10 +15,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
-      routes: routes,
+    return ChangeNotifierProvider(
+      create: (context) => ReportedIssuesModel(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: HomeContent(),
+        routes: routes,
+      ),
     );
   }
 }
@@ -68,35 +74,6 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         child: Icon(Icons.add),
       ),
-    );
-  }
-}
-
-class HomeContent extends StatelessWidget {
-  const HomeContent({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text('Welcome to FIP App'),
-        ElevatedButton(
-          onPressed: () {
-            Navigator.pushNamed(context, '/report');
-          },
-          child: Text('Report an Issue'),
-        ),
-        ElevatedButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => IssuesScreen()),
-            );
-          },
-          child: Text('View Issues'),
-        ),
-      ],
     );
   }
 }

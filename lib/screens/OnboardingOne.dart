@@ -11,15 +11,18 @@ class OnBoardingOne extends StatefulWidget {
   State<OnBoardingOne> createState() => _OnBoardingOneState();
 }
 
-class _OnBoardingOneState extends State<OnBoardingOne> with SingleTickerProviderStateMixin {
+class _OnBoardingOneState extends State<OnBoardingOne>
+    with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
-        Future.delayed(Duration(seconds: 5), () => {
-      Navigator.push(context,
-              MaterialPageRoute(builder: (context) => OnBoardingTwo()))
-    });
+    Future.delayed(
+        Duration(seconds: 5),
+        () => {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => OnBoardingTwo()))
+            });
   }
 
   @override
@@ -28,10 +31,13 @@ class _OnBoardingOneState extends State<OnBoardingOne> with SingleTickerProvider
     //     overlays: SystemUiOverlay.values);
     super.dispose();
   }
-  
+
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: GestureDetector(
+    return Scaffold(body: LayoutBuilder(builder: (context, constraints) {
+      final screenWidth = constraints.maxWidth;
+      final screenHeight = constraints.maxHeight;
+
+      return GestureDetector(
         onTap: () {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => OnBoardingTwo()));
@@ -40,21 +46,23 @@ class _OnBoardingOneState extends State<OnBoardingOne> with SingleTickerProvider
           children: [
             // ignore: sized_box_for_whitespace
             Container(
-              height: 300,
+              height: screenHeight * 0.3, // 30% of screen height
               child: Stack(
                 children: [
                   Positioned(
                     left: 0,
-                    top: 30,
+                    top: -30,
                     child: Image.asset(
                       'assets/Ellipse 1.png',
+                      // width: screenWidth * 0.8, // 80% of screen width
                     ),
                   ),
                   Positioned(
-                    left: 80,
-                    top: 30,
+                    left: screenWidth * 0.1, // Adjusted based on screen width
+                    top: -40,
                     child: Image.asset(
                       'assets/Ellipse 2.png',
+                      width: screenWidth * 1.1, // 80% of screen width
                     ),
                   ),
                 ],
@@ -62,7 +70,7 @@ class _OnBoardingOneState extends State<OnBoardingOne> with SingleTickerProvider
             ),
             SizedBox(height: 20),
             Text(
-              "Let's Get Stared!",
+              "Let's Get Started!",
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -123,7 +131,7 @@ class _OnBoardingOneState extends State<OnBoardingOne> with SingleTickerProvider
             SizedBox(height: 20),
           ],
         ),
-      ),
-    );
+      );
+    }));
   }
 }

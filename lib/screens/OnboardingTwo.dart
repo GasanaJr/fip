@@ -31,7 +31,11 @@ class _OnBoardingTwoState extends State<OnBoardingTwo> with SingleTickerProvider
   }
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GestureDetector(
+      body: LayoutBuilder(builder: ((context, constraints) {
+        final screenWidth = constraints.maxWidth;
+        final screenHeight = constraints.maxHeight;
+
+        return GestureDetector(
         onTap: () {
           print("Hello page 2");
           Navigator.push(context,
@@ -40,30 +44,33 @@ class _OnBoardingTwoState extends State<OnBoardingTwo> with SingleTickerProvider
         child: Column(
           children: [
             // ignore: sized_box_for_whitespace
-            Container(
-              height: 300,
-              child: Stack(
-                children: [
-                  Positioned(
-                    left: 0,
-                    top: 30,
-                    child: Image.asset(
-                      'assets/Ellipse 1.png',
-                    ),
+                Container(
+                  height: screenHeight * 0.3, // 30% of screen height
+                  child: Stack(
+                    children: [
+                      Positioned(
+                        left: 0,
+                        top: -30,
+                        child: Image.asset(
+                          'assets/Ellipse 1.png',
+                          // width: screenWidth * 0.8, // 80% of screen width
+                        ),
+                      ),
+                      Positioned(
+                        left:
+                            screenWidth * 0.1, // Adjusted based on screen width
+                        top: -40,
+                        child: Image.asset(
+                          'assets/Ellipse 2.png',
+                          width: screenWidth * 1.1, // 80% of screen width
+                        ),
+                      ),
+                    ],
                   ),
-                  Positioned(
-                    left: 80,
-                    top: 30,
-                    child: Image.asset(
-                      'assets/Ellipse 2.png',
-                    ),
-                  ),
-                ],
-              ),
-            ),
+                ),
             SizedBox(height: 20),
             Text(
-              "Let's Get Stared!",
+              "Let's Get Started!",
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -124,7 +131,8 @@ class _OnBoardingTwoState extends State<OnBoardingTwo> with SingleTickerProvider
             SizedBox(height: 20),
           ],
         ),
-      ),
+      );
+      }))
     );
   }
 }

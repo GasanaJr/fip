@@ -51,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-            appBar: PreferredSize(
+      appBar: PreferredSize(
         preferredSize: Size.fromHeight(70),
         child: AppBar(
           backgroundColor: Color(0xFF143342),
@@ -100,6 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Color(0xFF143342),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.report), label: 'Report'),
@@ -107,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
               icon: Icon(Icons.person_2_rounded), label: 'Profile'),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
+        selectedItemColor: Colors.white,
         onTap: _onItemTapped,
       ),
     );

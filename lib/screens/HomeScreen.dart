@@ -49,7 +49,6 @@ class HomeContent extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Divider(),
                 ),
-
                 SizedBox(
                   height: 10,
                 ),
@@ -150,7 +149,6 @@ class HomeContent extends StatelessWidget {
                 ),
 
                 // Reported Issues
-
                 SizedBox(
                   height: 30,
                 ),
@@ -163,7 +161,8 @@ class HomeContent extends StatelessWidget {
                   ),
                 ),
 
-                Expanded(
+                SizedBox(
+                  height: 400, // Set a fixed height for the grid view
                   child: Consumer<ReportedIssuesModel>(
                     builder: (context, value, child) {
                       return SingleChildScrollView(
@@ -191,7 +190,7 @@ class HomeContent extends StatelessWidget {
                       );
                     },
                   ),
-                )
+                ),
               ],
             ),
           ),

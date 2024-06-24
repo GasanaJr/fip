@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:infra/models/ReportedIssuesModel.dart';
 import 'package:provider/provider.dart';
+import 'package:infra/screens/DetailsScreen.dart';
 
 class ViewIssues extends StatelessWidget {
   const ViewIssues({super.key});
@@ -40,12 +41,6 @@ class ViewIssues extends StatelessWidget {
                                 color: Colors.white)),
                       ),
                       DataColumn(
-                          label: Text('Description',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                  color: Colors.white))),
-                      DataColumn(
                           label: Text('Status',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
@@ -73,16 +68,12 @@ class ViewIssues extends StatelessWidget {
                               model.reportedItems[i][0],
                               style: TextStyle(fontSize: 18),
                             )),
-                            DataCell(Text(
-                              model.reportedItems[i][1],
-                              style: TextStyle(fontSize: 18),
-                            )),
                             DataCell(Text(model.reportedItems[i][2],
                                 style: TextStyle(
                                     color:
                                         model.reportedItems[i][2] == 'Completed'
                                             ? Colors.green
-                                            : Colors.amber,
+                                            : Color.fromARGB(255, 163, 128, 24),
                                     fontSize: 18))),
                             DataCell(Row(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -90,7 +81,18 @@ class ViewIssues extends StatelessWidget {
                                 IconButton(
                                   icon: Icon(Icons.visibility),
                                   onPressed: () {
-                                    // Add view functionality here
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => DetailsScreen(
+                                                  issueName:
+                                                      model.reportedItems[i][1],
+                                                  location:
+                                                      model.reportedItems[i][0],
+                                                  levelOfDamage: "Moderate",
+                                                  progress:
+                                                      model.reportedItems[i][2],
+                                                )));
                                   },
                                 ),
                                 IconButton(

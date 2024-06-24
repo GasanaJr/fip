@@ -18,7 +18,7 @@ class _OnBoardingTwoState extends State<OnBoardingTwo> with SingleTickerProvider
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
         Future.delayed(Duration(seconds: 5), () => {
-      Navigator.push(context,
+      Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) => OnBoardingThree()))
     });
   }

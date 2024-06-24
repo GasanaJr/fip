@@ -20,7 +20,7 @@ class _OnBoardingOneState extends State<OnBoardingOne>
     Future.delayed(
         Duration(seconds: 5),
         () => {
-              Navigator.push(context,
+              Navigator.pushReplacement(context,
                   MaterialPageRoute(builder: (context) => OnBoardingTwo()))
             });
   }

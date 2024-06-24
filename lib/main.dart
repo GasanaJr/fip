@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:infra/models/ReportedIssuesModel.dart';
 import 'package:infra/routes/routes.dart';
 import 'package:infra/screens/HomeScreen.dart';
@@ -18,6 +19,9 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => ReportedIssuesModel(),
       child: MaterialApp(
+        theme: ThemeData(
+            textTheme:
+                GoogleFonts.montserratTextTheme(Theme.of(context).textTheme)),
         debugShowCheckedModeBanner: false,
         home: SplashScreen(),
         routes: routes,
@@ -55,16 +59,20 @@ class _HomeScreenState extends State<HomeScreen> {
         preferredSize: Size.fromHeight(70),
         child: AppBar(
           backgroundColor: Color(0xFF143342),
-          title: Text(""),
-          leading: IconButton(
-            icon: Icon(
-              Icons.menu,
-              color: Colors.white,
-              size: 30,
-            ),
-            onPressed: () {
-              // Define your onPressed action here
-            },
+          title: Row(
+            children: [
+              Container(
+                margin: EdgeInsets.only(left: 20, top: 10),
+                child: Text(
+                  "FIP",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    fontSize: 24,
+                  ),
+                ),
+              )
+            ],
           ),
           actions: [
             Row(

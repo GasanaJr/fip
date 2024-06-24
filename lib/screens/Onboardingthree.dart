@@ -21,7 +21,7 @@ class _OnBoardingThreeState extends State<OnBoardingThree>
     Future.delayed(
         Duration(seconds: 5),
         () => {
-              Navigator.push(context,
+              Navigator.pushReplacement(context,
                   MaterialPageRoute(builder: (context) => RegisterScreen()))
             });
   }

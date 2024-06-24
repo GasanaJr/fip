@@ -6,12 +6,11 @@ class ReportedIssueTile extends StatelessWidget {
   final String Location;
   final String Description;
   final String Progress;
-  const ReportedIssueTile({
-    super.key,
-    required this.Location,
-    required this.Description,
-    required this.Progress
-  });
+  const ReportedIssueTile(
+      {super.key,
+      required this.Location,
+      required this.Description,
+      required this.Progress});
 
   @override
   Widget build(BuildContext context) {
@@ -40,12 +39,12 @@ class ReportedIssueTile extends StatelessWidget {
               Description,
               style: TextStyle(color: Colors.white, fontSize: 20),
             ),
-                        SizedBox(
+            SizedBox(
               height: 10,
             ),
-            Center(
-              child: Text( Progress,
-              style: TextStyle(color: Colors.white, fontSize: 20),),
+            Text(
+              "Status: $Progress",
+              style: TextStyle(color: Colors.white, fontSize: 20),
             )
           ],
         ),

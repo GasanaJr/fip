@@ -172,7 +172,7 @@ class RegisterScreen extends StatelessWidget {
                                     top: 20.0, bottom: 20),
                                 child: ElevatedButton(
                                   onPressed: () {
-                                    Navigator.pushNamed(context, '/login');
+                                    Navigator.pushReplacementNamed(context, '/login');
                                   },
                                   style: ButtonStyle(
                                     backgroundColor:

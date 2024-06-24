@@ -5,10 +5,12 @@ import 'package:flutter/material.dart';
 class ReportedIssueTile extends StatelessWidget {
   final String Location;
   final String Description;
+  final String Progress;
   const ReportedIssueTile({
     super.key,
     required this.Location,
     required this.Description,
+    required this.Progress
   });
 
   @override
@@ -38,6 +40,13 @@ class ReportedIssueTile extends StatelessWidget {
               Description,
               style: TextStyle(color: Colors.white, fontSize: 20),
             ),
+                        SizedBox(
+              height: 10,
+            ),
+            Center(
+              child: Text( Progress,
+              style: TextStyle(color: Colors.white, fontSize: 20),),
+            )
           ],
         ),
       ),

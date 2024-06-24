@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:infra/models/ReportedIssuesModel.dart';
 import 'package:provider/provider.dart';
 import 'package:infra/screens/DetailsScreen.dart';
+import 'package:infra/screens/AdminDetailsScreen.dart';
 
 class ViewIssues extends StatelessWidget {
   const ViewIssues({super.key});
@@ -84,7 +85,8 @@ class ViewIssues extends StatelessWidget {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => DetailsScreen(
+                                            builder: (context) =>
+                                                AdminDetailsScreen(
                                                   issueName:
                                                       model.reportedItems[i][1],
                                                   location:

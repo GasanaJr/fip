@@ -7,6 +7,7 @@ import 'package:infra/routes/routes.dart';
 import 'package:infra/screens/HomeScreen.dart';
 import 'package:infra/screens/SplashScreen.dart';
 import 'package:infra/screens/ReportScreen.dart';
+import 'package:infra/screens/ProfileScreens.dart';
 import 'package:provider/provider.dart';
 
 void main() => runApp(MyApp());
@@ -43,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
   static const List<Widget> _widgetOptions = <Widget>[
     HomeContent(),
     ReportScreen(),
-    ProfileScreen(),
+    ProfileScreens(),
   ];
 
   void _onItemTapped(int index) {

@@ -29,7 +29,21 @@ class _ReportScreenState extends State<ReportScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(70),
+        child: AppBar(
+          iconTheme: IconThemeData(color: Colors.white),
+          backgroundColor: Color(0xFF143342),
+          title: Text(
+            "Report an Issue",
+            style: TextStyle(
+                fontSize: 26, color: Colors.white, fontWeight: FontWeight.bold),
+          ),
+        ),
+      ),
       body: ListView(
         children: [
           Container(
@@ -45,32 +59,38 @@ class _ReportScreenState extends State<ReportScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      _image == null
-                          ? Text('No Image Selected')
-                          : Container(
-                              width: 300,
-                              height: 300,
-                              decoration: BoxDecoration(border: Border.all()),
-                              child: Image.file(
-                                _image!,
-                                fit: BoxFit.cover,
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        _image == null
+                            ? Text('No Image Selected')
+                            : Container(
+                                width: screenWidth * 0.8,
+                                height: screenHeight * 0.4,
+                                decoration: BoxDecoration(border: Border.all()),
+                                child: Image.file(
+                                  _image!,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
-                            ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      IconButton(
-                        onPressed: _openCamera,
-                        icon: Icon(
-                          Icons.camera_alt,
-                          size: 50,
+                        SizedBox(
+                          height: 20,
                         ),
-                        tooltip: "Open Camera",
-                      )
-                    ],
+                        IconButton(
+                          onPressed: _openCamera,
+                          icon: Icon(
+                            Icons.camera_alt,
+                            size: 50,
+                          ),
+                          tooltip: "Open Camera",
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 15),

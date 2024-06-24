@@ -81,7 +81,9 @@ class HomeContent extends StatelessWidget {
                                     color: Color(0xFF143342),
                                     borderRadius: BorderRadius.circular(35)),
                                 child: IconButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.pushNamed(context, '/report');
+                                    },
                                     icon: Icon(
                                       Icons.add,
                                       color: Colors.white,
@@ -105,7 +107,9 @@ class HomeContent extends StatelessWidget {
                                     color: Color(0xFF143342),
                                     borderRadius: BorderRadius.circular(35)),
                                 child: IconButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.pushNamed(context, '/issues');
+                                    },
                                     icon: Icon(
                                       Icons.remove_red_eye,
                                       color: Colors.white,
@@ -129,7 +133,9 @@ class HomeContent extends StatelessWidget {
                                     color: Color(0xFF143342),
                                     borderRadius: BorderRadius.circular(35)),
                                 child: IconButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.pushNamed(context, '/survey');
+                                    },
                                     icon: Icon(
                                       Icons.feedback,
                                       color: Colors.white,

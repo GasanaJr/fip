@@ -4,6 +4,7 @@ import 'package:infra/screens/Register.dart';
 import 'package:infra/screens/ReportScreen.dart';
 import 'package:infra/screens/OnboardingOne.dart';
 import 'package:infra/screens/ViewIssues.dart';
+import 'package:infra/screens/SurveyScreen.dart';
 
 var routes = {
   '/home': (context) => HomeScreen(),
@@ -12,4 +13,5 @@ var routes = {
   '/register': (context) => RegisterScreen(),
   '/onboard': (context) => OnBoardingOne(),
   '/issues': (context) => ViewIssues(),
+  '/survey': (context) => SurveyScreen(),
 };

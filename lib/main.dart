@@ -8,6 +8,7 @@ import 'package:infra/screens/HomeScreen.dart';
 import 'package:infra/screens/SplashScreen.dart';
 import 'package:infra/screens/ReportScreen.dart';
 import 'package:infra/screens/ProfileScreens.dart';
+import 'package:infra/screens/SurveyScreen.dart';
 import 'package:provider/provider.dart';
 
 void main() => runApp(MyApp());

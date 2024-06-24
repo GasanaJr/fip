@@ -10,22 +10,14 @@ class ViewIssues extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            // Add back button functionality here
-          },
-        ),
-        title: Text('Reported Issues'),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.menu),
-            onPressed: () {
-              // Add menu button functionality here
-            },
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(70),
+        child: AppBar(
+          title: Text(
+            "Reported Issues",
+            style: TextStyle(fontSize: 26),
           ),
-        ],
+        ),
       ),
       body: SafeArea(
         child: Padding(

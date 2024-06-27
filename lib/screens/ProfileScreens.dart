@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_interpolation_to_compose_strings, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers
 
 import 'package:flutter/material.dart';
+import 'package:infra/screens/EditProfile.dart';
 
 class ProfileScreens extends StatelessWidget {
   final bool isAdmin = false;
@@ -173,7 +174,9 @@ class ProfileScreens extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               MaterialButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => EditProfile()));
+                },
                 child: Container(
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.black54),

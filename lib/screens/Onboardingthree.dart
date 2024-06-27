@@ -18,12 +18,12 @@ class _OnBoardingThreeState extends State<OnBoardingThree>
     // TODO: implement initState
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
-    Future.delayed(
-        Duration(seconds: 5),
-        () => {
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => RegisterScreen()))
-            });
+    // Future.delayed(
+    //     Duration(seconds: 5),
+    //     () => {
+    //           Navigator.pushReplacement(context,
+    //               MaterialPageRoute(builder: (context) => RegisterScreen()))
+    //         });
   }
 
   @override
@@ -40,7 +40,8 @@ class _OnBoardingThreeState extends State<OnBoardingThree>
 
       return GestureDetector(
         onTap: () {
-          Navigator.push(context,
+          print("Hello Page 3");
+          Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) => RegisterScreen()));
         },
         child: Column(

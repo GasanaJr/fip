@@ -17,12 +17,12 @@ class _OnBoardingOneState extends State<OnBoardingOne>
   void initState() {
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
-    Future.delayed(
-        Duration(seconds: 5),
-        () => {
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => OnBoardingTwo()))
-            });
+    // Future.delayed(
+    //     Duration(seconds: 5),
+    //     () => {
+    //           Navigator.pushReplacement(context,
+    //               MaterialPageRoute(builder: (context) => OnBoardingTwo()))
+    //         });
   }
 
   @override
@@ -39,8 +39,9 @@ class _OnBoardingOneState extends State<OnBoardingOne>
 
       return GestureDetector(
         onTap: () {
-          Navigator.push(context,
+          Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) => OnBoardingTwo()));
+          print("Hello World");
         },
         child: Column(
           children: [

@@ -182,7 +182,7 @@ class HomeContent extends StatelessWidget {
                             shrinkWrap: true,
                             physics: NeverScrollableScrollPhysics(),
                             itemCount: value.reportedItems.length,
-                            padding: EdgeInsets.all(12),
+                            padding: EdgeInsets.all(5),
                             gridDelegate:
                                 SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 2,

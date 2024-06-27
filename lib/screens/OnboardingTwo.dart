@@ -17,10 +17,10 @@ class _OnBoardingTwoState extends State<OnBoardingTwo> with SingleTickerProvider
     // TODO: implement initState
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
-        Future.delayed(Duration(seconds: 5), () => {
-      Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => OnBoardingThree()))
-    });
+    //     Future.delayed(Duration(seconds: 5), () => {
+    //   Navigator.pushReplacement(context,
+    //           MaterialPageRoute(builder: (context) => OnBoardingThree()))
+    // });
   }
 
     @override
@@ -38,7 +38,7 @@ class _OnBoardingTwoState extends State<OnBoardingTwo> with SingleTickerProvider
         return GestureDetector(
         onTap: () {
           print("Hello page 2");
-          Navigator.push(context,
+          Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) => OnBoardingThree()));
         },
         child: Column(

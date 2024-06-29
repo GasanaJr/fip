@@ -58,7 +58,6 @@ Citizens in Rwanda.
 
 8. Team:
 
-
 Kwihangana Dimitri
 Grace Nalule Nakabuye
 Didas Gasana Junior

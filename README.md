@@ -1,64 +1,62 @@
-# infra
+# Fix Infrastructure Project (FIP)
 
-A new Flutter project.
+## Overview
+
+Fix Infrastructure Project (FIP) is a mobile application designed to empower citizens in Rwanda to report infrastructure issues, suggest improvements, and actively participate in the improvement process.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
+This project is the starting point for a Flutter application. If this is your first Flutter project, here are a few resources to get you started:
 
 - [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
 - [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+For comprehensive guidance on Flutter development, check out the [online documentation](https://docs.flutter.dev/), which offers tutorials, samples, and a full API reference.
 
+## Features
 
-FIP
+- **User Registration and Profile Management**: Secure and user-friendly registration and profile management.
+- **Reporting Damaged Infrastructure**: Report issues with location, priority, and pictures.
+- **Admin Panel**: Manage reported issues efficiently.
+- **User Notifications**: Stay updated with request status notifications.
 
-Title: Fix Infrastructure Project (FIP)
-Description: A mobile application empowering citizens in Rwanda to report infrastructure issues, suggest improvements, and participate in the improvement process.
+### Optional Features Planned for Future Development
 
-Features:
+- Additional enhancements and functionalities as the project progresses.
 
-User registration and profile management
-Reporting damaged infrastructure (location, priority, pictures)
-Admin panel for managing reported issues
-User notifications for request status updates
-(Optional) Features planned for future development
+## Technology Stack
 
-4. Technology Stack:
+- **Frontend**: Flutter, Dart
+- **Version Control**: Git
 
+(The technology stack will be updated with progress.)
 
-Frontend (Flutter, Dart)
-Version control (Git)
-(will be updated with progress)
+### Usage
 
-5. Market Analysis:
+- clone the repository `git clone https://github.com/GasanaJr/fip`
+- Change your working directory to the cloned folder `cd fip`
+- Run `flutter pub get` to install all the dependencies
+- The project should be ready for either debugging or running via `flutter run`
 
-SeeClickFix (US)
-FixMyStreet (UK)
-Ushahidi (Kenya)
+## Market Analysis
 
+- **SeeClickFix (US)**
+- **FixMyStreet (UK)**
+- **Ushahidi (Kenya)**
 
-6. Unique Value Proposition (UVP):
+## Unique Value Proposition (UVP)
 
-Enhanced citizen engagement (decision-making, suggestions)
-Sustainability focus (monitoring long-term impacts)
-Data-driven decision making (prioritization based on data)
-User-friendly interface for broad accessibility
+- **Enhanced Citizen Engagement**: Enable citizens to participate in decision-making and provide suggestions.
+- **Sustainability Focus**: Monitor long-term impacts and sustainability of improvements.
+- **Data-Driven Decision Making**: Prioritize based on collected data.
+- **User-Friendly Interface**: Ensure broad accessibility and ease of use.
 
+## Target Audience
 
-7. Target Audience:
+- Citizens in Rwanda.
 
-Citizens in Rwanda.
+## Team
 
-
-8. Team:
-
-
-Kwihangana Dimitri
-Grace Nalule Nakabuye
-Didas Gasana Junior
+- Kwihangana Dimitri
+- Grace Nalule Nakabuye
+- Didas Gasana Junior

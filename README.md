@@ -31,6 +31,13 @@ For comprehensive guidance on Flutter development, check out the [online documen
 
 (The technology stack will be updated with progress.)
 
+### Usage
+
+- clone the repository `git clone https://github.com/GasanaJr/fip`
+- Change your working directory to the cloned folder `cd fip`
+- Run `flutter pub get` to install all the dependencies
+- The project should be ready for either debugging or running via `flutter run`
+
 ## Market Analysis
 
 - **SeeClickFix (US)**

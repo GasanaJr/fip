@@ -3,7 +3,12 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class RegisterScreen extends StatelessWidget {
-  const RegisterScreen({super.key});
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController fullNameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController passwordConfirmController =
+      TextEditingController();
+  RegisterScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -91,6 +96,7 @@ class RegisterScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                             ),
+                            controller: fullNameController,
                           ),
                         ),
                         SizedBox(
@@ -115,6 +121,7 @@ class RegisterScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                             ),
+                            controller: emailController,
                           ),
                         ),
                         SizedBox(
@@ -138,6 +145,7 @@ class RegisterScreen extends StatelessWidget {
                             ),
                           ),
                           obscureText: true,
+                          controller: passwordController,
                         ),
                         SizedBox(
                           height: 5,
@@ -160,6 +168,7 @@ class RegisterScreen extends StatelessWidget {
                             ),
                           ),
                           obscureText: true,
+                          controller: passwordConfirmController,
                         ),
                         SizedBox(
                           height: 5,
@@ -172,7 +181,8 @@ class RegisterScreen extends StatelessWidget {
                                     top: 20.0, bottom: 20),
                                 child: ElevatedButton(
                                   onPressed: () {
-                                    Navigator.pushReplacementNamed(context, '/login');
+                                    // Navigator.pushReplacementNamed(
+                                    //     context, '/login');
                                   },
                                   style: ButtonStyle(
                                     backgroundColor:

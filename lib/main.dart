@@ -1,7 +1,9 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, library_private_types_in_public_api
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:infra/firebase_options.dart';
 import 'package:infra/models/ReportedIssuesModel.dart';
 import 'package:infra/routes/routes.dart';
 import 'package:infra/screens/HomeScreen.dart';
@@ -11,7 +13,11 @@ import 'package:infra/screens/ProfileScreens.dart';
 import 'package:infra/screens/SurveyScreen.dart';
 import 'package:provider/provider.dart';
 
-void main() => runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -86,9 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: Colors.white,
                     size: 30,
                   ),
-                  onPressed: () {
-                    
-                  },
+                  onPressed: () {},
                 ),
                 SizedBox(width: 16), // Add space between icons
                 IconButton(
@@ -97,9 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: Colors.white,
                     size: 30,
                   ),
-                  onPressed: () {
-                    
-                  },
+                  onPressed: () {},
                 ),
               ],
             ),

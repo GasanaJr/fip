@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "602278823038",
+    "project_id": "fipbackend",
+    "storage_bucket": "fipbackend.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:602278823038:android:7b55cfe584bf255d76842f",
+        "android_client_info": {
+          "package_name": "com.example.infra"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlm4-ARgxelxUdiqE7OR5rxd8u3X1l7O4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

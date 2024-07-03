@@ -1,3 +1,4 @@
+import 'package:infra/auth/login_or_register.dart';
 import 'package:infra/main.dart';
 import 'package:infra/screens/Login.dart';
 import 'package:infra/screens/Register.dart';
@@ -8,9 +9,8 @@ import 'package:infra/screens/SurveyScreen.dart';
 
 var routes = {
   '/home': (context) => HomeScreen(),
-  '/login': (context) => AuthScreen(),
   '/report': (context) => ReportScreen(),
-  '/register': (context) => RegisterScreen(),
+  '/register': (context) => LoginOrRegister(),
   '/onboard': (context) => OnBoardingOne(),
   '/issues': (context) => ViewIssues(),
   '/survey': (context) => SurveyScreen(),

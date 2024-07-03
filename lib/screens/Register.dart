@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:infra/helper/helpers.dart';
 
 class RegisterScreen extends StatefulWidget {
-  RegisterScreen({super.key});
+  final void Function()? onTap;
+
+  RegisterScreen({super.key, required this.onTap});
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
@@ -13,13 +15,9 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController emailController = TextEditingController();
-
   final TextEditingController fullNameController = TextEditingController();
-
   final TextEditingController passwordController = TextEditingController();
-
-  final TextEditingController passwordConfirmController =
-      TextEditingController();
+  final TextEditingController passwordConfirmController = TextEditingController();
 
   void registerUser() async {
     // Show a loader
@@ -42,6 +40,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         UserCredential? userCredential = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(
                 email: emailController.text, password: passwordController.text);
+        FirebaseAuth.instance.signOut();
         Navigator.pop(context);
       } on FirebaseAuthException catch (e) {
         Navigator.pop(context);
@@ -260,10 +259,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         decoration: TextDecoration.underline,
                                       ),
                                       recognizer: TapGestureRecognizer()
-                                        ..onTap = () {
-                                          Navigator.pushNamed(
-                                              context, '/login');
-                                        },
+                                        ..onTap = widget.onTap,
                                     ),
                                   ],
                                 ),

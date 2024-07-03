@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:infra/auth/login_or_register.dart';
 import 'package:infra/screens/Register.dart';
 
 class OnBoardingThree extends StatefulWidget {
@@ -42,7 +43,7 @@ class _OnBoardingThreeState extends State<OnBoardingThree>
         onTap: () {
           print("Hello Page 3");
           Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => RegisterScreen()));
+              MaterialPageRoute(builder: (context) => LoginOrRegister()));
         },
         child: Column(
           children: [

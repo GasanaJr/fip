@@ -4,9 +4,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:infra/helper/helpers.dart';
+import 'package:infra/services/auth_service.dart';
+import 'package:provider/provider.dart';
 
 class AuthScreen extends StatefulWidget {
-  const AuthScreen({super.key});
+  final void Function()? onTap;
+
+  const AuthScreen({super.key, required this.onTap});
 
   @override
   State<AuthScreen> createState() => _AuthScreenState();
@@ -14,8 +18,8 @@ class AuthScreen extends StatefulWidget {
 
 class _AuthScreenState extends State<AuthScreen> {
   final TextEditingController emailController = TextEditingController();
-
   final TextEditingController passwordController = TextEditingController();
+
   void userLogin(BuildContext context) async {
     // Show loader
     showDialog(
@@ -26,12 +30,12 @@ class _AuthScreenState extends State<AuthScreen> {
 
     // Signin block
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: emailController.text, password: passwordController.text);
-      if (context.mounted) Navigator.pop(context);
-    } on FirebaseAuthException catch (e) {
-      displayMessageToUser(e.code, context);
+      await Provider.of<AuthService>(context, listen: false)
+          .signIn(emailController.text, passwordController.text);
       Navigator.pop(context);
+    } on FirebaseAuthException catch (e) {
+      Navigator.pop(context);
+      displayMessageToUser(e.code, context);
     }
   }
 
@@ -156,7 +160,6 @@ class _AuthScreenState extends State<AuthScreen> {
                           child: ElevatedButton(
                             onPressed: () {
                               userLogin(context);
-                              // Navigator.pushReplacementNamed(context, '/home');
                             },
                             style: ButtonStyle(
                               backgroundColor: MaterialStatePropertyAll<Color>(
@@ -179,7 +182,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         Center(
                           child: RichText(
                             text: TextSpan(
-                              text: "Forgot your Password? ",
+                              text: "Don't have an account? ",
                               style: TextStyle(
                                 fontSize: 17,
                                 fontWeight: FontWeight.bold,
@@ -195,9 +198,7 @@ class _AuthScreenState extends State<AuthScreen> {
                                     decoration: TextDecoration.underline,
                                   ),
                                   recognizer: TapGestureRecognizer()
-                                    ..onTap = () {
-                                      Navigator.pushNamed(context, '/report');
-                                    },
+                                    ..onTap = widget.onTap,
                                 ),
                               ],
                             ),

@@ -11,6 +11,7 @@ import 'package:infra/routes/routes.dart';
 import 'package:infra/screens/HomeScreen.dart';
 import 'package:infra/screens/ReportScreen.dart';
 import 'package:infra/screens/ProfileScreens.dart';
+import 'package:infra/services/auth_service.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -24,16 +25,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => ReportedIssuesModel(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => ReportedIssuesModel(),
+        ),
+        ChangeNotifierProvider(create: (context) => AuthService())
+      ],
       child: MaterialApp(
-        theme: ThemeData(
-            textTheme:
-                GoogleFonts.montserratTextTheme(Theme.of(context).textTheme)),
-        debugShowCheckedModeBanner: false,
-        home: AuthPage(),
-        routes: routes,
-      ),
+            theme: ThemeData(
+                textTheme:
+                    GoogleFonts.montserratTextTheme(Theme.of(context).textTheme)),
+            debugShowCheckedModeBanner: false,
+            home: AuthPage(),
+            routes: routes,
+          ),
     );
   }
 }

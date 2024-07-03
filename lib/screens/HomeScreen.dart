@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:infra/components/ReportedIssueTile.dart';
 import 'package:infra/models/ReportedIssuesModel.dart';
+import 'package:infra/screens/Login.dart';
+import 'package:infra/services/auth_service.dart';
 import 'package:provider/provider.dart';
 import 'package:infra/routes/routes.dart';
 
@@ -13,6 +15,8 @@ class HomeContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<AuthService>(context).user;
+    final displayName = user?.displayName ?? 'User';
     return Scaffold(
       body: ListView(
         children: [
@@ -27,7 +31,7 @@ class HomeContent extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24.0),
                   child: Text(
-                    "Welcome, Junior",
+                    "Welcome, $displayName",
                     style: TextStyle(fontSize: 24),
                   ),
                 ),

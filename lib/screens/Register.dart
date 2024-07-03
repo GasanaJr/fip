@@ -40,6 +40,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         UserCredential? userCredential = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(
                 email: emailController.text, password: passwordController.text);
+        await userCredential.user?.updateDisplayName(fullNameController.text); 
         FirebaseAuth.instance.signOut();
         Navigator.pop(context);
       } on FirebaseAuthException catch (e) {

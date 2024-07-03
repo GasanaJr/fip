@@ -1,16 +1,16 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, library_private_types_in_public_api
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:infra/firebase_options.dart';
+import 'package:infra/helper/auth.dart';
 import 'package:infra/models/ReportedIssuesModel.dart';
 import 'package:infra/routes/routes.dart';
 import 'package:infra/screens/HomeScreen.dart';
-import 'package:infra/screens/SplashScreen.dart';
 import 'package:infra/screens/ReportScreen.dart';
 import 'package:infra/screens/ProfileScreens.dart';
-import 'package:infra/screens/SurveyScreen.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
             textTheme:
                 GoogleFonts.montserratTextTheme(Theme.of(context).textTheme)),
         debugShowCheckedModeBanner: false,
-        home: SplashScreen(),
+        home: AuthPage(),
         routes: routes,
       ),
     );
@@ -47,6 +47,9 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
+  void logOutUser() {
+    FirebaseAuth.instance.signOut();
+  }
 
   static const List<Widget> _widgetOptions = <Widget>[
     HomeContent(),
@@ -88,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 IconButton(
                   icon: Icon(
-                    Icons.person,
+                    Icons.notifications,
                     color: Colors.white,
                     size: 30,
                   ),
@@ -97,11 +100,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(width: 16), // Add space between icons
                 IconButton(
                   icon: Icon(
-                    Icons.notifications,
+                    Icons.logout,
                     color: Colors.white,
                     size: 30,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    logOutUser();
+                  },
                 ),
               ],
             ),

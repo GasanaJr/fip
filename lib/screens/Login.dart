@@ -1,10 +1,39 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_build_context_synchronously
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:infra/helper/helpers.dart';
 
-class AuthScreen extends StatelessWidget {
+class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
+
+  @override
+  State<AuthScreen> createState() => _AuthScreenState();
+}
+
+class _AuthScreenState extends State<AuthScreen> {
+  final TextEditingController emailController = TextEditingController();
+
+  final TextEditingController passwordController = TextEditingController();
+  void userLogin(BuildContext context) async {
+    // Show loader
+    showDialog(
+        context: context,
+        builder: (context) => const Center(
+              child: CircularProgressIndicator(),
+            ));
+
+    // Signin block
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: emailController.text, password: passwordController.text);
+      if (context.mounted) Navigator.pop(context);
+    } on FirebaseAuthException catch (e) {
+      displayMessageToUser(e.code, context);
+      Navigator.pop(context);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -98,6 +127,7 @@ class AuthScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                             ),
+                            controller: emailController,
                           ),
                         ),
                         SizedBox(height: 5),
@@ -119,12 +149,14 @@ class AuthScreen extends StatelessWidget {
                             ),
                           ),
                           obscureText: true,
+                          controller: passwordController,
                         ),
                         SizedBox(height: 20),
                         Center(
                           child: ElevatedButton(
                             onPressed: () {
-                              Navigator.pushReplacementNamed(context, '/home');
+                              userLogin(context);
+                              // Navigator.pushReplacementNamed(context, '/home');
                             },
                             style: ButtonStyle(
                               backgroundColor: MaterialStatePropertyAll<Color>(

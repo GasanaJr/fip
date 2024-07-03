@@ -1,14 +1,54 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_const_constructors_in_immutables, unused_local_variable, use_build_context_synchronously
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:infra/helper/helpers.dart';
 
-class RegisterScreen extends StatelessWidget {
+class RegisterScreen extends StatefulWidget {
+  RegisterScreen({super.key});
+
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController emailController = TextEditingController();
+
   final TextEditingController fullNameController = TextEditingController();
+
   final TextEditingController passwordController = TextEditingController();
+
   final TextEditingController passwordConfirmController =
       TextEditingController();
-  RegisterScreen({super.key});
+
+  void registerUser() async {
+    // Show a loader
+    showDialog(
+        context: context,
+        builder: (context) => const Center(
+              child: CircularProgressIndicator(),
+            ));
+
+    // Check if passwords match
+    if (passwordConfirmController.text != passwordController.text) {
+      // Pop the loader
+      Navigator.pop(context);
+
+      // Show error message
+      displayMessageToUser("The passwords don't match", context);
+    } else {
+      // Create the actual user
+      try {
+        UserCredential? userCredential = await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(
+                email: emailController.text, password: passwordController.text);
+        Navigator.pop(context);
+      } on FirebaseAuthException catch (e) {
+        Navigator.pop(context);
+        displayMessageToUser(e.code, context);
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -181,6 +221,7 @@ class RegisterScreen extends StatelessWidget {
                                     top: 20.0, bottom: 20),
                                 child: ElevatedButton(
                                   onPressed: () {
+                                    registerUser();
                                     // Navigator.pushReplacementNamed(
                                     //     context, '/login');
                                   },

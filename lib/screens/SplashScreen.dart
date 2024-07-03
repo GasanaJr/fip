@@ -17,11 +17,11 @@ class _SplashScreenState extends State<SplashScreen>
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
 
-    Future.delayed(
-        Duration(seconds: 3),
-        () => {
-              Navigator.of(context).pushReplacementNamed('/onboard'),
-            });
+    Future.delayed(Duration(seconds: 3), () {
+      if (mounted) {
+        Navigator.of(context).pushReplacementNamed('/onboard');
+      }
+    });
   }
 
   @override
@@ -31,6 +31,7 @@ class _SplashScreenState extends State<SplashScreen>
     super.dispose();
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
@@ -55,7 +56,7 @@ class _SplashScreenState extends State<SplashScreen>
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                   fontSize: 32),
-            )
+            ),
           ],
         ),
       ),

@@ -19,7 +19,7 @@ class AuthPage extends StatelessWidget {
           if (authService.user != null) {
             return HomeScreen();
           } else {
-            return LoginOrRegister();
+            return SplashScreen();
           }
         },
       ),

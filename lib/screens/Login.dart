@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:infra/helper/helpers.dart';
+import 'package:infra/main.dart';
 import 'package:infra/services/auth_service.dart';
 import 'package:provider/provider.dart';
 
@@ -33,6 +34,8 @@ class _AuthScreenState extends State<AuthScreen> {
       await Provider.of<AuthService>(context, listen: false)
           .signIn(emailController.text, passwordController.text);
       Navigator.pop(context);
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => HomeScreen()));
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
       displayMessageToUser(e.code, context);

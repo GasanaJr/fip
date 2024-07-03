@@ -17,7 +17,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController fullNameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController passwordConfirmController = TextEditingController();
+  final TextEditingController passwordConfirmController =
+      TextEditingController();
 
   void registerUser() async {
     // Show a loader
@@ -40,9 +41,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
         UserCredential? userCredential = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(
                 email: emailController.text, password: passwordController.text);
-        await userCredential.user?.updateDisplayName(fullNameController.text); 
+        await userCredential.user?.updateDisplayName(fullNameController.text);
         FirebaseAuth.instance.signOut();
         Navigator.pop(context);
+        displayMessageToUser("Registration Successfull", context);
+        emailController.clear();
+        fullNameController.clear();
+        passwordConfirmController.clear();
+        passwordController.clear();
       } on FirebaseAuthException catch (e) {
         Navigator.pop(context);
         displayMessageToUser(e.code, context);

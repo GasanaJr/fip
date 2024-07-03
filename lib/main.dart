@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:infra/auth/login_or_register.dart';
 import 'package:infra/firebase_options.dart';
 import 'package:infra/helper/auth.dart';
 import 'package:infra/models/ReportedIssuesModel.dart';
@@ -11,6 +12,7 @@ import 'package:infra/routes/routes.dart';
 import 'package:infra/screens/HomeScreen.dart';
 import 'package:infra/screens/ReportScreen.dart';
 import 'package:infra/screens/ProfileScreens.dart';
+import 'package:infra/screens/SplashScreen.dart';
 import 'package:infra/services/auth_service.dart';
 import 'package:provider/provider.dart';
 
@@ -33,13 +35,13 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => AuthService())
       ],
       child: MaterialApp(
-            theme: ThemeData(
-                textTheme:
-                    GoogleFonts.montserratTextTheme(Theme.of(context).textTheme)),
-            debugShowCheckedModeBanner: false,
-            home: AuthPage(),
-            routes: routes,
-          ),
+        theme: ThemeData(
+            textTheme:
+                GoogleFonts.montserratTextTheme(Theme.of(context).textTheme)),
+        debugShowCheckedModeBanner: false,
+        home: AuthPage(),
+        routes: routes,
+      ),
     );
   }
 }
@@ -55,6 +57,8 @@ class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
   void logOutUser() {
     FirebaseAuth.instance.signOut();
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => LoginOrRegister()));
   }
 
   static const List<Widget> _widgetOptions = <Widget>[

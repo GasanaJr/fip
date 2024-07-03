@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-// Display error messages
+// Display error messages helper
 
 void displayMessageToUser(String message, BuildContext context) {
   showDialog(

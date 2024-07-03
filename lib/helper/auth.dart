@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:infra/main.dart';
 import 'package:infra/screens/SplashScreen.dart';
 
+// Auth helper to listen to authstate changes
 class AuthPage extends StatelessWidget {
   const AuthPage({super.key});
 

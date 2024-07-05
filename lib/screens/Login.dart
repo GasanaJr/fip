@@ -5,9 +5,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:infra/helper/helpers.dart';
 import 'package:infra/main.dart';
-import 'package:infra/screens/VerificationScreen.dart';
 import 'package:infra/services/auth_service.dart';
-import 'package:infra/services/opt_service.dart'; // Add this line
+import 'package:infra/services/opt_service.dart';
 import 'package:provider/provider.dart';
 
 class AuthScreen extends StatefulWidget {
@@ -22,10 +21,9 @@ class AuthScreen extends StatefulWidget {
 class _AuthScreenState extends State<AuthScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController phoneController = TextEditingController();
   final TextEditingController codeController = TextEditingController();
   bool codeSent = false;
-  final OtpService otpService = OtpService(); // Add this line
+  final OtpService otpService = OtpService();
 
   void userLogin(BuildContext context) async {
     // Show loader
@@ -42,7 +40,7 @@ class _AuthScreenState extends State<AuthScreen> {
           .signIn(emailController.text, passwordController.text);
 
       // Send verification code to the phone number
-      await otpService.requestOtp(phoneController.text); // Use the OTP service
+      await otpService.requestOtp(emailController.text);
 
       setState(() {
         codeSent = true;
@@ -69,7 +67,7 @@ class _AuthScreenState extends State<AuthScreen> {
 
     // Verify OTP
     try {
-      await otpService.verifyOtp(phoneController.text, codeController.text); // Use the OTP service
+      await otpService.verifyOtp(emailController.text, codeController.text);
 
       Navigator.pop(context);
       Navigator.pushReplacement(
@@ -200,25 +198,6 @@ class _AuthScreenState extends State<AuthScreen> {
                             obscureText: true,
                             controller: passwordController,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 15),
-                            child: Text(
-                              "Phone Number",
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                          TextField(
-                            decoration: InputDecoration(
-                              labelText: "Enter your Phone Number",
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            controller: phoneController,
-                          ),
                           SizedBox(height: 20),
                           Center(
                             child: ElevatedButton(
@@ -226,19 +205,21 @@ class _AuthScreenState extends State<AuthScreen> {
                                 userLogin(context);
                               },
                               style: ButtonStyle(
-                                backgroundColor: MaterialStatePropertyAll<Color>(
+                                backgroundColor:
+                                    MaterialStatePropertyAll<Color>(
                                   Color(0xFF143342),
                                 ),
                                 foregroundColor:
-                                  MaterialStatePropertyAll<Color>(Colors.white),
+                                    MaterialStatePropertyAll<Color>(
+                                        Colors.white),
                                 textStyle: MaterialStatePropertyAll<TextStyle>(
                                   TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                minimumSize:
-                                  MaterialStatePropertyAll<Size>(Size(150, 50)),
+                                minimumSize: MaterialStatePropertyAll<Size>(
+                                    Size(150, 50)),
                               ),
                               child: Text("Log In"),
                             ),
@@ -296,19 +277,21 @@ class _AuthScreenState extends State<AuthScreen> {
                                 verifyCode(context);
                               },
                               style: ButtonStyle(
-                                backgroundColor: MaterialStatePropertyAll<Color>(
+                                backgroundColor:
+                                    MaterialStatePropertyAll<Color>(
                                   Color(0xFF143342),
                                 ),
                                 foregroundColor:
-                                  MaterialStatePropertyAll<Color>(Colors.white),
+                                    MaterialStatePropertyAll<Color>(
+                                        Colors.white),
                                 textStyle: MaterialStatePropertyAll<TextStyle>(
                                   TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                minimumSize:
-                                  MaterialStatePropertyAll<Size>(Size(150, 50)),
+                                minimumSize: MaterialStatePropertyAll<Size>(
+                                    Size(150, 50)),
                               ),
                               child: Text("Verify Code"),
                             ),

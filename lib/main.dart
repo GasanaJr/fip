@@ -12,7 +12,6 @@ import 'package:infra/routes/routes.dart';
 import 'package:infra/screens/HomeScreen.dart';
 import 'package:infra/screens/ReportScreen.dart';
 import 'package:infra/screens/ProfileScreens.dart';
-import 'package:infra/screens/SplashScreen.dart';
 import 'package:infra/services/auth_service.dart';
 import 'package:provider/provider.dart';
 

@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class ReportScreen extends StatefulWidget {
   const ReportScreen({super.key});
@@ -13,6 +15,10 @@ class ReportScreen extends StatefulWidget {
 
 class _ReportScreenState extends State<ReportScreen> {
   File? _image;
+  String? _location;
+  String? _levelOfDamage;
+  String? _description;
+  String? _priority;
 
   // Method to open the camera
   Future<void> _openCamera() async {
@@ -24,6 +30,48 @@ class _ReportScreenState extends State<ReportScreen> {
       setState(() {
         _image = File(pickedFile.path);
       });
+    }
+  }
+
+  Future<void> _reportIssue() async {
+    if (_image != null &&
+        _location != null &&
+        _levelOfDamage != null &&
+        _description != null &&
+        _priority != null) {
+      // File upload to firebase storage
+      final storageRef = FirebaseStorage.instance
+          .ref()
+          .child('issue_images/${DateTime.now().millisecondsSinceEpoch}.jpg');
+      await storageRef.putFile(_image!);
+      final imageUrl = await storageRef.getDownloadURL();
+
+      // Save issue to Firestore
+      await FirebaseFirestore.instance.collection('issues').add({
+        'location': _location,
+        'levelOfDamage': _levelOfDamage,
+        'description': _description,
+        'priority': _priority,
+        'imageUrl': imageUrl,
+        'timestamp': FieldValue.serverTimestamp(),
+      });
+
+      // Clear the form
+      setState(() {
+        _image = null;
+        _location = null;
+        _levelOfDamage = null;
+        _description = null;
+        _priority = null;
+      });
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Issue reported successfully!')),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Please fill all fields and select an image')),
+      );
     }
   }
 
@@ -111,6 +159,7 @@ class _ReportScreenState extends State<ReportScreen> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
+                      onChanged: (value) => _location = value,
                     ),
                   ),
                   SizedBox(
@@ -149,7 +198,9 @@ class _ReportScreenState extends State<ReportScreen> {
                           child: Text("High"),
                         ),
                       ],
-                      onChanged: (String? newValue) {},
+                      onChanged: (String? newValue) {
+                        _levelOfDamage = newValue;
+                      },
                     ),
                   ),
                   SizedBox(
@@ -174,6 +225,7 @@ class _ReportScreenState extends State<ReportScreen> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
+                    onChanged: (value) => _description = value,
                   ),
                   SizedBox(
                     height: 5,
@@ -202,7 +254,9 @@ class _ReportScreenState extends State<ReportScreen> {
                       DropdownMenuItem(value: "4", child: Text("4")),
                       DropdownMenuItem(value: "5", child: Text("5 - Highest")),
                     ],
-                    onChanged: (String? newValue) {},
+                    onChanged: (String? newValue) {
+                      _priority = newValue;
+                    },
                   ),
                   SizedBox(
                     height: 5,
@@ -222,7 +276,7 @@ class _ReportScreenState extends State<ReportScreen> {
                         Padding(
                           padding: const EdgeInsets.only(top: 20.0, bottom: 20),
                           child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: _reportIssue,
                             style: ButtonStyle(
                               backgroundColor: MaterialStatePropertyAll<Color>(
                                   Color(0xFF143342)),

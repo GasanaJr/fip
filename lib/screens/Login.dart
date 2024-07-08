@@ -39,7 +39,7 @@ class _AuthScreenState extends State<AuthScreen> {
       await Provider.of<AuthService>(context, listen: false)
           .signIn(emailController.text, passwordController.text);
 
-      // Send verification code to the phone number
+      // Send verification code to the email
       await otpService.requestOtp(emailController.text);
 
       setState(() {

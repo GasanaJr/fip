@@ -98,8 +98,9 @@ class ViewIssues extends StatelessWidget {
                                 ),
                                 IconButton(
                                   icon: Icon(Icons.delete),
-                                  onPressed: () {
-                                    model.removeIssue(i);
+                                  onPressed: () async{
+                                    await model.removeIssue(i);
+                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Issue deleted Successfully")));
                                   },
                                 ),
                               ],

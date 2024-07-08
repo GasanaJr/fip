@@ -27,7 +27,10 @@ class ReportedIssuesModel extends ChangeNotifier {
 
   List<Map<String, dynamic>> get reportedItems => _reportedIssues;
 
-  void removeIssue(int index) {
+  Future<void> removeIssue(int index) async {
+    String docId = _reportedIssues[index]['id'];
+    await FirebaseFirestore.instance.collection('issues').doc(docId).delete();
+    print("Item deleted");
     _reportedIssues.removeAt(index);
     notifyListeners();
   }

@@ -54,6 +54,7 @@ Future<void> _reportIssue() async {
         'description': _description,
         'priority': _priority,
         'imageUrl': imageUrl,
+        'progress': 'Not Started',
         'timestamp': FieldValue.serverTimestamp(),
       });
       print("Issue saved");

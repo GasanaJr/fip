@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:infra/models/ReportedIssuesModel.dart';
 import 'package:provider/provider.dart';
 import 'package:infra/screens/DetailsScreen.dart';
-import 'package:infra/screens/AdminDetailsScreen.dart';
+import 'package:infra/screens/AdminDetailsScreen.dart'; 
 
 class ViewIssues extends StatelessWidget {
   const ViewIssues({super.key});
@@ -66,13 +66,13 @@ class ViewIssues extends StatelessWidget {
                           ),
                           cells: [
                             DataCell(Text(
-                              model.reportedItems[i][0],
+                              model.reportedItems[i]['location'],
                               style: TextStyle(fontSize: 18),
                             )),
-                            DataCell(Text(model.reportedItems[i][2],
+                            DataCell(Text(model.reportedItems[i]['progress'],
                                 style: TextStyle(
                                     color:
-                                        model.reportedItems[i][2] == 'Completed'
+                                        model.reportedItems[i]['progress'] == 'Completed'
                                             ? Colors.green
                                             : Color.fromARGB(255, 163, 128, 24),
                                     fontSize: 18))),
@@ -86,14 +86,13 @@ class ViewIssues extends StatelessWidget {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                AdminDetailsScreen(
-                                                  issueName:
-                                                      model.reportedItems[i][1],
-                                                  location:
-                                                      model.reportedItems[i][0],
-                                                  levelOfDamage: "Moderate",
-                                                  progress:
-                                                      model.reportedItems[i][2],
+                                                DetailsScreen(
+                                                  issueName: model.reportedItems[i]['description'],
+                                                  location: model.reportedItems[i]['location'],
+                                                  levelOfDamage: model.reportedItems[i]['levelOfDamage'],
+                                                  progress: model.reportedItems[i]['progress'],
+                                                  imageUrl: model.reportedItems[i]['imageUrl'],
+                                                  description: model.reportedItems[i]['description'],
                                                 )));
                                   },
                                 ),

@@ -33,13 +33,14 @@ class _ReportScreenState extends State<ReportScreen> {
     }
   }
 
-  Future<void> _reportIssue() async {
-    if (_image != null &&
-        _location != null &&
-        _levelOfDamage != null &&
-        _description != null &&
-        _priority != null) {
-      // File upload to firebase storage
+Future<void> _reportIssue() async {
+  if (_image != null &&
+      _location != null &&
+      _levelOfDamage != null &&
+      _description != null &&
+      _priority != null) {
+    try {
+      // File upload to Firebase Storage
       final storageRef = FirebaseStorage.instance
           .ref()
           .child('issue_images/${DateTime.now().millisecondsSinceEpoch}.jpg');
@@ -55,6 +56,7 @@ class _ReportScreenState extends State<ReportScreen> {
         'imageUrl': imageUrl,
         'timestamp': FieldValue.serverTimestamp(),
       });
+      print("Issue saved");
 
       // Clear the form
       setState(() {
@@ -68,12 +70,19 @@ class _ReportScreenState extends State<ReportScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Issue reported successfully!')),
       );
-    } else {
+    } catch (e) {
+      print("Error reporting issue: $e");
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Please fill all fields and select an image')),
+        SnackBar(content: Text('Failed to report issue: $e')),
       );
     }
+  } else {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Please fill all fields and select an image')),
+    );
   }
+}
+
 
   @override
   Widget build(BuildContext context) {

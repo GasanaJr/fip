@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, prefer_interpolation_to_compose_strings, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -8,6 +6,8 @@ class DetailsScreen extends StatelessWidget {
   final String location;
   final String levelOfDamage;
   final String progress;
+  final String imageUrl;
+  final String description;
 
   const DetailsScreen({
     super.key,
@@ -15,6 +15,8 @@ class DetailsScreen extends StatelessWidget {
     required this.location,
     required this.levelOfDamage,
     required this.progress,
+    required this.imageUrl,
+    required this.description,
   });
 
   @override
@@ -40,7 +42,7 @@ class DetailsScreen extends StatelessWidget {
             children: [
               // Image submitted
               Container(
-                child: Image.asset('assets/road1.webp'),
+                child: Image.network(imageUrl),
               ),
               SizedBox(
                 height: 40,
@@ -69,7 +71,7 @@ class DetailsScreen extends StatelessWidget {
                         height: 10,
                       ),
                       Text(
-                        "There is a broken road at Kisimenti that has the potential cause accidents",
+                        description,
                         style: GoogleFonts.montserrat(fontSize: 20),
                       ),
                       SizedBox(

@@ -179,7 +179,6 @@ class HomeContent extends StatelessWidget {
                     builder: (context, value, child) {
                       return SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
-                        // ignore: sized_box_for_whitespace
                         child: Container(
                           width: MediaQuery.of(context).size.width * 1.5,
                           child: GridView.builder(
@@ -187,16 +186,15 @@ class HomeContent extends StatelessWidget {
                             physics: NeverScrollableScrollPhysics(),
                             itemCount: value.reportedItems.length,
                             padding: EdgeInsets.all(5),
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
+                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 2,
                               childAspectRatio: 1 / 0.6,
                             ),
                             itemBuilder: (context, index) {
                               return ReportedIssueTile(
-                                Location: value.reportedItems[index][0],
-                                Description: value.reportedItems[index][1],
-                                Progress: value.reportedItems[index][2],
+                                Location: value.reportedItems[index]['location'] ?? 'Unknown location',
+                                Description: value.reportedItems[index]['description'] ?? 'No description',
+                                Progress: value.reportedItems[index]['progress'] ?? 'Unknown',
                               );
                             },
                           ),

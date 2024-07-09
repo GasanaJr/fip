@@ -115,6 +115,7 @@ class ViewIssues extends StatelessWidget {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
+                                      // Add abstraction to the views ensuring the admins can update
                                       builder: (context) => isAdmin
                                           ? AdminDetailsScreen(
                                               issueName: data['description'],
@@ -140,6 +141,7 @@ class ViewIssues extends StatelessWidget {
                                 },
                               ),
                               if (isAdmin)
+                              // Add abstraction to ensure only admins can delete issues
                                 IconButton(
                                   icon: Icon(Icons.delete),
                                   onPressed: () async {

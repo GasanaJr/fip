@@ -10,9 +10,14 @@ import 'package:infra/services/auth_service.dart';
 import 'package:provider/provider.dart';
 import 'package:infra/routes/routes.dart';
 
-class HomeContent extends StatelessWidget {
+class HomeContent extends StatefulWidget {
   const HomeContent({super.key});
 
+  @override
+  State<HomeContent> createState() => _HomeContentState();
+}
+
+class _HomeContentState extends State<HomeContent> {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<AuthService>(context).user;
@@ -186,15 +191,22 @@ class HomeContent extends StatelessWidget {
                             physics: NeverScrollableScrollPhysics(),
                             itemCount: value.reportedItems.length,
                             padding: EdgeInsets.all(5),
-                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 2,
                               childAspectRatio: 1 / 0.6,
                             ),
                             itemBuilder: (context, index) {
                               return ReportedIssueTile(
-                                Location: value.reportedItems[index]['location'] ?? 'Unknown location',
-                                Description: value.reportedItems[index]['description'] ?? 'No description',
-                                Progress: value.reportedItems[index]['progress'] ?? 'Unknown',
+                                Location: value.reportedItems[index]
+                                        ['location'] ??
+                                    'Unknown location',
+                                Description: value.reportedItems[index]
+                                        ['description'] ??
+                                    'No description',
+                                Progress: value.reportedItems[index]
+                                        ['progress'] ??
+                                    'Unknown',
                               );
                             },
                           ),

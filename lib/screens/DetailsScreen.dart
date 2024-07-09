@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -41,8 +43,12 @@ class DetailsScreen extends StatelessWidget {
           child: Column(
             children: [
               // Image submitted
+              // ignore: avoid_unnecessary_containers
               Container(
-                child: Image.network(imageUrl),
+                child: Image.network(
+                  imageUrl,
+                  height: 300,
+                ),
               ),
               SizedBox(
                 height: 40,

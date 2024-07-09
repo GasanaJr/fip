@@ -1,13 +1,17 @@
 // ignore_for_file: prefer_const_constructors, prefer_interpolation_to_compose_strings, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class AdminDetailsScreen extends StatelessWidget {
+class AdminDetailsScreen extends StatefulWidget {
   final String issueName;
   final String location;
   final String levelOfDamage;
   final String progress;
+  final String imageUrl;
+  final String description;
+  final String id;
 
   const AdminDetailsScreen({
     super.key,
@@ -15,7 +19,17 @@ class AdminDetailsScreen extends StatelessWidget {
     required this.location,
     required this.levelOfDamage,
     required this.progress,
+    required this.imageUrl,
+    required this.description,
+    required this.id,
   });
+
+  @override
+  State<AdminDetailsScreen> createState() => _AdminDetailsScreenState();
+}
+
+class _AdminDetailsScreenState extends State<AdminDetailsScreen> {
+  String? _newStatus;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +56,10 @@ class AdminDetailsScreen extends StatelessWidget {
                 children: [
                   // Image submitted
                   Container(
-                    child: Image.asset('assets/road1.webp'),
+                    child: Image.network(
+                      widget.imageUrl,
+                      height: 300,
+                    ),
                   ),
                   SizedBox(
                     height: 40,
@@ -63,21 +80,21 @@ class AdminDetailsScreen extends StatelessWidget {
                         SizedBox(
                           height: 20,
                         ),
-                        Text(issueName,
+                        Text(widget.issueName,
                             style: GoogleFonts.montserrat(
                                 fontWeight: FontWeight.bold, fontSize: 20)),
                         SizedBox(
                           height: 10,
                         ),
                         Text(
-                          "There is a broken road at Kisimenti that has the potential to cause accidents",
+                          widget.description,
                           style: GoogleFonts.montserrat(fontSize: 20),
                         ),
                         SizedBox(
                           height: 10,
                         ),
                         Text(
-                          "Location: $location",
+                          "Location: ${widget.location}",
                           style: GoogleFonts.montserrat(
                               fontWeight: FontWeight.bold, fontSize: 20),
                         ),
@@ -85,7 +102,7 @@ class AdminDetailsScreen extends StatelessWidget {
                           height: 10,
                         ),
                         Text(
-                          "Level of Damage: $levelOfDamage",
+                          "Level of Damage: ${widget.levelOfDamage}",
                           style: GoogleFonts.montserrat(
                               fontWeight: FontWeight.bold, fontSize: 20),
                         ),
@@ -93,7 +110,7 @@ class AdminDetailsScreen extends StatelessWidget {
                           height: 10,
                         ),
                         Text(
-                          "Status: $progress",
+                          "Status: ${widget.progress}",
                           style: GoogleFonts.montserrat(
                               fontWeight: FontWeight.bold, fontSize: 20),
                         ),
@@ -126,7 +143,9 @@ class AdminDetailsScreen extends StatelessWidget {
                               DropdownMenuItem(
                                   value: "Completed", child: Text("Completed")),
                             ],
-                            onChanged: (String? newValue) {},
+                            onChanged: (String? newValue) {
+                              _newStatus = newValue;
+                            },
                           ),
                         ),
                         Center(
@@ -136,8 +155,13 @@ class AdminDetailsScreen extends StatelessWidget {
                               bottom: 20,
                             ),
                             child: ElevatedButton(
-                              onPressed: () {
-                                // Navigator.pushReplacementNamed(context, '/login');
+                              onPressed: () async {
+                                await FirebaseFirestore.instance
+                                    .collection('issues')
+                                    .doc(widget.id)
+                                    .update({
+                                  'progress': _newStatus,
+                                }).then((value) => print("Item updated"));
                               },
                               style: ButtonStyle(
                                 backgroundColor:

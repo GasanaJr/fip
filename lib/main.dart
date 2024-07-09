@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (context) => ReportedIssuesModel(),
+          create: (_) => ReportedIssuesModel(),
         ),
         ChangeNotifierProvider(create: (context) => AuthService())
       ],

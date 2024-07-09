@@ -4,12 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:infra/screens/AdminDetailsScreen.dart';
 import 'package:infra/screens/DetailsScreen.dart';
+import 'package:infra/services/auth_service.dart';
+import 'package:provider/provider.dart';
 
 class ViewIssues extends StatelessWidget {
   const ViewIssues({super.key});
-  final isAdmin = true;
+
   @override
   Widget build(BuildContext context) {
+    var isAdmin = false;
+    final user = Provider.of<AuthService>(context).user;
+    if (user?.email == 'gasanajr08@gmail.com') {
+      isAdmin = true;
+    }
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(70),
@@ -29,7 +37,12 @@ class ViewIssues extends StatelessWidget {
               if (!snapshot.hasData) {
                 return Center(child: CircularProgressIndicator());
               }
+
               final issues = snapshot.data!.docs;
+
+              if (issues.isEmpty) {
+                return Center(child: Text('No issues found.'));
+              }
 
               return SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
@@ -62,6 +75,16 @@ class ViewIssues extends StatelessWidget {
                     rows: issues.map((issue) {
                       var data = issue.data() as Map<String, dynamic>;
                       var id = issue.id;
+
+                      // Provide default values for missing data fields
+                      data['location'] = data['location'] ?? 'Unknown location';
+                      data['progress'] = data['progress'] ?? 'Not Started';
+                      data['description'] =
+                          data['description'] ?? 'No description';
+                      data['levelOfDamage'] =
+                          data['levelOfDamage'] ?? 'Unknown';
+                      data['imageUrl'] = data['imageUrl'] ?? '';
+
                       return DataRow(
                         color: MaterialStateProperty.resolveWith<Color?>(
                           (Set<MaterialState> states) {
@@ -75,100 +98,97 @@ class ViewIssues extends StatelessWidget {
                             data['location'],
                             style: TextStyle(fontSize: 18),
                           )),
-                          DataCell(Text(data['progress'] ?? 'Not Started',
-                              style: TextStyle(
-                                  color: data['progress'] == 'Completed'
-                                      ? Colors.green
-                                      : Color.fromARGB(255, 163, 128, 24),
-                                  fontSize: 18))),
+                          DataCell(Text(
+                            data['progress'],
+                            style: TextStyle(
+                                color: data['progress'] == 'Completed'
+                                    ? Colors.green
+                                    : Color.fromARGB(255, 163, 128, 24),
+                                fontSize: 18),
+                          )),
                           DataCell(Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               IconButton(
                                 icon: Icon(Icons.visibility),
                                 onPressed: () {
-                                  isAdmin
-                                      ? Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  AdminDetailsScreen(
-                                                    issueName:
-                                                        data['description'],
-                                                    location: data['location'],
-                                                    levelOfDamage:
-                                                        data['levelOfDamage'],
-                                                    progress: data['progress'],
-                                                    imageUrl: data['imageUrl'],
-                                                    description:
-                                                        data['description'],
-                                                    id: id,
-                                                  )))
-                                      : Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  DetailsScreen(
-                                                    issueName:
-                                                        data['description'],
-                                                    location: data['location'],
-                                                    levelOfDamage:
-                                                        data['levelOfDamage'],
-                                                    progress: data['progress'],
-                                                    imageUrl: data['imageUrl'],
-                                                    description:
-                                                        data['description'],
-                                                  )));
-                                },
-                              ),
-                              IconButton(
-                                icon: Icon(Icons.delete),
-                                onPressed: () async {
-                                  bool? confirmDelete = await showDialog(
-                                    context: context,
-                                    builder: (context) => AlertDialog(
-                                      title: Text('Confirm Deletion'),
-                                      content: Text(
-                                          'Are you sure you want to delete this issue?'),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () =>
-                                              Navigator.of(context).pop(false),
-                                          child: Text('Cancel'),
-                                        ),
-                                        TextButton(
-                                          onPressed: () =>
-                                              Navigator.of(context).pop(true),
-                                          child: Text('Yes'),
-                                        ),
-                                      ],
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => isAdmin
+                                          ? AdminDetailsScreen(
+                                              issueName: data['description'],
+                                              location: data['location'],
+                                              levelOfDamage:
+                                                  data['levelOfDamage'],
+                                              progress: data['progress'],
+                                              imageUrl: data['imageUrl'],
+                                              description: data['description'],
+                                              id: id,
+                                            )
+                                          : DetailsScreen(
+                                              issueName: data['description'],
+                                              location: data['location'],
+                                              levelOfDamage:
+                                                  data['levelOfDamage'],
+                                              progress: data['progress'],
+                                              imageUrl: data['imageUrl'],
+                                              description: data['description'],
+                                            ),
                                     ),
                                   );
-
-                                  if (confirmDelete == true) {
-                                    try {
-                                      await FirebaseFirestore.instance
-                                          .collection('issues')
-                                          .doc(id)
-                                          .delete();
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        SnackBar(
-                                            content: Text(
-                                                "Issue deleted successfully")),
-                                      );
-                                    } catch (e) {
-                                      print("Error: $e");
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        SnackBar(
-                                            content:
-                                                Text("Failed to delete issue")),
-                                      );
-                                    }
-                                  }
                                 },
                               ),
+                              if (isAdmin)
+                                IconButton(
+                                  icon: Icon(Icons.delete),
+                                  onPressed: () async {
+                                    bool? confirmDelete = await showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                        title: Text('Confirm Deletion'),
+                                        content: Text(
+                                            'Are you sure you want to delete this issue?'),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () =>
+                                                Navigator.of(context)
+                                                    .pop(false),
+                                            child: Text('Cancel'),
+                                          ),
+                                          TextButton(
+                                            onPressed: () =>
+                                                Navigator.of(context).pop(true),
+                                            child: Text('Yes'),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+
+                                    if (confirmDelete == true) {
+                                      try {
+                                        await FirebaseFirestore.instance
+                                            .collection('issues')
+                                            .doc(id)
+                                            .delete();
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                              content: Text(
+                                                  "Issue deleted successfully")),
+                                        );
+                                      } catch (e) {
+                                        print("Error: $e");
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                              content: Text(
+                                                  "Failed to delete issue")),
+                                        );
+                                      }
+                                    }
+                                  },
+                                ),
                             ],
                           )),
                         ],

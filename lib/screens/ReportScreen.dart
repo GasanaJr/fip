@@ -34,9 +34,13 @@ class _ReportScreenState extends State<ReportScreen> {
     }
   }
 
-  Future<void> _reportIssue() async {
+  Future<void> _reportIssue(BuildContext context) async {
     if (_formKey.currentState!.validate() && _image != null) {
-      print("Sending a request");
+      showDialog(
+          context: context,
+          builder: (context) => const Center(
+                child: CircularProgressIndicator(),
+              ));
       try {
         // File upload to Firebase Storage
         final storageRef = FirebaseStorage.instance
@@ -66,10 +70,13 @@ class _ReportScreenState extends State<ReportScreen> {
           _priority = null;
         });
 
+        Navigator.pop(context);
+
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Issue reported successfully!')),
         );
       } catch (e) {
+        Navigator.pop(context);
         print("Error reporting issue: $e");
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Failed to report issue: $e')),
@@ -346,7 +353,7 @@ class _ReportScreenState extends State<ReportScreen> {
                                   );
 
                                   if (confirmSubmission == true) {
-                                    await _reportIssue();
+                                    await _reportIssue(context);
                                   }
                                 }
                               },

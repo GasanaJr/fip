@@ -177,13 +177,26 @@ class _AdminDetailsScreenState extends State<AdminDetailsScreen> {
                                           ],
                                         ));
                                 if (confirmUpdate == true) {
+                                  showDialog(
+                                      // ignore: use_build_context_synchronously
+                                      context: context,
+                                      builder: (context) => const Center(
+                                            child: CircularProgressIndicator(),
+                                          ));
                                   await FirebaseFirestore.instance
                                       .collection('issues')
                                       .doc(widget.id)
                                       .update({
                                     'progress': _newStatus,
-                                  }).then((value) => print("Item updated"));
+                                  }).then((value) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                          content: Text(
+                                              'Issue reported successfully!')),
+                                    );
+                                  });
                                 }
+                                Navigator.pop(context);
                               },
                               style: ButtonStyle(
                                 backgroundColor:

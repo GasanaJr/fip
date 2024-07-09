@@ -339,7 +339,7 @@ class _ReportScreenState extends State<ReportScreen> {
                                         TextButton(
                                           onPressed: () =>
                                               Navigator.of(context).pop(true),
-                                          child: Text("Yes"),
+                                          child: Text("Submit"),
                                         ),
                                       ],
                                     ),

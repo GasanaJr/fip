@@ -156,12 +156,34 @@ class _AdminDetailsScreenState extends State<AdminDetailsScreen> {
                             ),
                             child: ElevatedButton(
                               onPressed: () async {
-                                await FirebaseFirestore.instance
-                                    .collection('issues')
-                                    .doc(widget.id)
-                                    .update({
-                                  'progress': _newStatus,
-                                }).then((value) => print("Item updated"));
+                                bool? confirmUpdate = await showDialog(
+                                    context: context,
+                                    builder: (context) => AlertDialog(
+                                          title: Text("Status Update"),
+                                          content: Text(
+                                              "You are about to update a status"),
+                                          actions: [
+                                            TextButton(
+                                              onPressed: () =>
+                                                  Navigator.of(context)
+                                                      .pop(false),
+                                              child: Text("Cancel"),
+                                            ),
+                                            TextButton(
+                                                onPressed: () =>
+                                                    Navigator.of(context)
+                                                        .pop(true),
+                                                child: Text("Update"))
+                                          ],
+                                        ));
+                                if (confirmUpdate == true) {
+                                  await FirebaseFirestore.instance
+                                      .collection('issues')
+                                      .doc(widget.id)
+                                      .update({
+                                    'progress': _newStatus,
+                                  }).then((value) => print("Item updated"));
+                                }
                               },
                               style: ButtonStyle(
                                 backgroundColor:

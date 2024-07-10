@@ -1,10 +1,21 @@
 // ignore_for_file: prefer_const_constructors, prefer_interpolation_to_compose_strings, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
-class SurveyScreen extends StatelessWidget {
+class SurveyScreen extends StatefulWidget {
   const SurveyScreen({super.key});
 
+  @override
+  State<SurveyScreen> createState() => _SurveyScreenState();
+}
+
+class _SurveyScreenState extends State<SurveyScreen> {
+  String? _satisfaction;
+  String? _responseTime;
+  String? _communityInteraction;
+  TextEditingController _improvements = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,7 +88,9 @@ class SurveyScreen extends StatelessWidget {
                           child: Text("Bad 😣"),
                         ),
                       ],
-                      onChanged: (String? newValue) {},
+                      onChanged: (String? newValue) {
+                        _satisfaction = newValue;
+                      },
                     ),
                   ),
                   Padding(
@@ -111,7 +124,9 @@ class SurveyScreen extends StatelessWidget {
                           child: Text("Bad 😣"),
                         ),
                       ],
-                      onChanged: (String? newValue) {},
+                      onChanged: (String? newValue) {
+                        _responseTime = newValue;
+                      },
                     ),
                   ),
                   Padding(
@@ -149,7 +164,9 @@ class SurveyScreen extends StatelessWidget {
                           child: Text("Bad 😣"),
                         ),
                       ],
-                      onChanged: (String? newValue) {},
+                      onChanged: (String? newValue) {
+                        _communityInteraction = newValue;
+                      },
                     ),
                   ),
                   Padding(
@@ -171,13 +188,57 @@ class SurveyScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
+                      controller: _improvements,
                     ),
                   ),
                   Center(
                     child: Padding(
                       padding: const EdgeInsets.only(top: 20.0, bottom: 20),
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          bool? confirmSubmission = await showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: Text("Confirm Submission"),
+                              content: Text("You are about to submit a survey"),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.of(context).pop(false),
+                                  child: Text("Cancel"),
+                                ),
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.of(context).pop(true),
+                                  child: Text("Submit"),
+                                ),
+                              ],
+                            ),
+                          );
+                          if (confirmSubmission == true) {
+                            showDialog(
+                              context: context,
+                              builder: (context) => const Center(
+                                child: CircularProgressIndicator(),
+                              ),
+                            );
+                            await FirebaseFirestore.instance
+                                .collection('surveys')
+                                .add({
+                              'satisfaction': _satisfaction,
+                              'responseTime': _responseTime,
+                              'communityInteraction': _communityInteraction,
+                              'improvements': _improvements.text
+                            });
+                            Navigator.pop(context);
+
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text("Survey Submitted Successfully"),
+                              ),
+                            );
+                          }
+                        },
                         style: ButtonStyle(
                           backgroundColor: MaterialStatePropertyAll<Color>(
                               Color(0xFF143342)),

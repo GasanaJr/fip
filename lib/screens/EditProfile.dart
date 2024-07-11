@@ -1,10 +1,69 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:infra/helper/helpers.dart';
 
-class EditProfile extends StatelessWidget {
-  final bool isAdmin = false;
+class EditProfile extends StatefulWidget {
   const EditProfile({super.key});
+
+  @override
+  State<EditProfile> createState() => _EditProfileState();
+}
+
+class _EditProfileState extends State<EditProfile> {
+  final bool isAdmin = false;
+  final _formKey = GlobalKey<FormState>();
+  final fullNameController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final passwordConfirmController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    // Fetch current user details
+    final user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      fullNameController.text = user.displayName ?? "";
+      emailController.text = user.email ?? "";
+    }
+  }
+
+  @override
+  void dispose() {
+    fullNameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    passwordConfirmController.dispose();
+    super.dispose();
+  }
+
+  void updateUserProfile() async {
+    if (_formKey.currentState!.validate()) {
+      showDialog(
+          context: context,
+          builder: (context) => const Center(
+                child: CircularProgressIndicator(),
+              ));
+      try {
+        User? user = FirebaseAuth.instance.currentUser;
+        if (user != null) {
+          await user.updateDisplayName(fullNameController.text);
+          await user.updateEmail(emailController.text);
+          displayMessageToUser("User update successfully", context);
+        }
+
+        if (passwordController.text.isNotEmpty &&
+            passwordConfirmController.text == passwordController.text) {
+          await user?.updatePassword(passwordController.text);
+        }
+      } on FirebaseAuthException catch (e) {
+        displayMessageToUser("An error occured $e", context);
+      }
+      Navigator.pop(context);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +96,7 @@ class EditProfile extends StatelessWidget {
                   children: [
                     Image.asset('assets/Male User.png'),
                     Text(
-                      "Didas Junior",
+                      fullNameController.text,
                       style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
@@ -93,6 +152,7 @@ class EditProfile extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
+                        controller: fullNameController,
                       ),
                     ),
                     SizedBox(
@@ -117,6 +177,7 @@ class EditProfile extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
+                        controller: emailController,
                       ),
                     ),
                     SizedBox(
@@ -139,6 +200,7 @@ class EditProfile extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
+                      controller: passwordController,
                       obscureText: true,
                     ),
                     SizedBox(
@@ -161,6 +223,7 @@ class EditProfile extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
+                      controller: passwordConfirmController,
                       obscureText: true,
                     ),
                     SizedBox(
@@ -173,7 +236,9 @@ class EditProfile extends StatelessWidget {
                             padding:
                                 const EdgeInsets.only(top: 20.0, bottom: 20),
                             child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                updateUserProfile();
+                              },
                               style: ButtonStyle(
                                 backgroundColor:
                                     MaterialStatePropertyAll<Color>(

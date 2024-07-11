@@ -89,7 +89,9 @@ class _SurveyScreenState extends State<SurveyScreen> {
                         ),
                       ],
                       onChanged: (String? newValue) {
-                        _satisfaction = newValue;
+                        setState(() {
+                          _satisfaction = newValue;
+                        });
                       },
                     ),
                   ),
@@ -125,7 +127,9 @@ class _SurveyScreenState extends State<SurveyScreen> {
                         ),
                       ],
                       onChanged: (String? newValue) {
-                        _responseTime = newValue;
+                        setState(() {
+                          _responseTime = newValue;
+                        });
                       },
                     ),
                   ),
@@ -165,7 +169,9 @@ class _SurveyScreenState extends State<SurveyScreen> {
                         ),
                       ],
                       onChanged: (String? newValue) {
-                        _communityInteraction = newValue;
+                        setState(() {
+                          _communityInteraction = newValue;
+                        });
                       },
                     ),
                   ),
@@ -231,6 +237,13 @@ class _SurveyScreenState extends State<SurveyScreen> {
                               'improvements': _improvements.text
                             });
                             Navigator.pop(context);
+
+                            setState(() {
+                              _communityInteraction = null;
+                              _responseTime = null;
+                              _satisfaction = null;
+                              _improvements.clear();
+                            });
 
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(

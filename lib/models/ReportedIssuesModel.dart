@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 
 class ReportedIssuesModel extends ChangeNotifier {
   final List<Map<String, dynamic>> _reportedIssues = [];
+  int completedCount = 0;
+  int progressCount = 0;
+  int notStartedCount = 0;
+  bool _isFetching = false;
+  bool isCountsFetched = false;
 
   ReportedIssuesModel() {
     _fetchReportedIssues();
@@ -14,7 +19,7 @@ class ReportedIssuesModel extends ChangeNotifier {
     _reportedIssues.clear();
     for (var doc in querySnapshot.docs) {
       final data = doc.data();
-      data['id'] = doc.id; // Include the document ID
+      data['id'] = doc.id;
       data['location'] = data['location'] ?? 'Unknown location';
       data['levelOfDamage'] = data['levelOfDamage'] ?? 'Unknown';
       data['description'] = data['description'] ?? 'No description';
@@ -42,6 +47,38 @@ class ReportedIssuesModel extends ChangeNotifier {
       ).catchError((error) => print("Failed to delete issue: $error"));
     } catch (e) {
       print("Error deleting issue: $e");
+    }
+  }
+
+  Future<void> fetchIssueCounts() async {
+    if (_isFetching || isCountsFetched) return;
+    _isFetching = true;
+
+    try {
+      final completedSnapshot = await FirebaseFirestore.instance
+          .collection('issues')
+          .where('progress', isEqualTo: 'Completed')
+          .get();
+
+      completedCount = completedSnapshot.size;
+
+      final progressSnapshot = await FirebaseFirestore.instance
+          .collection('issues')
+          .where('progress', isEqualTo: 'Progress')
+          .get();
+      progressCount = progressSnapshot.size;
+
+      final notStartedSnapshot = await FirebaseFirestore.instance
+          .collection('issues')
+          .where('progress', isEqualTo: 'Not Started')
+          .get();
+      notStartedCount = notStartedSnapshot.size;
+
+      isCountsFetched = true;
+      notifyListeners();
+    } catch (error) {
+    } finally {
+      _isFetching = false;
     }
   }
 }

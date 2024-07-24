@@ -58,18 +58,6 @@ class ViewSurvey extends StatelessWidget {
                                   fontSize: 18,
                                   color: Colors.white))),
                       DataColumn(
-                          label: Text('Community Interaction',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                  color: Colors.white))),
-                      DataColumn(
-                          label: Text('Improvements',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                  color: Colors.white))),
-                      DataColumn(
                           label: Text('Actions',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
@@ -102,14 +90,6 @@ class ViewSurvey extends StatelessWidget {
                           )),
                           DataCell(Text(
                             data['responseTime'],
-                            style: TextStyle(fontSize: 18),
-                          )),
-                          DataCell(Text(
-                            data['communityInteraction'],
-                            style: TextStyle(fontSize: 18),
-                          )),
-                          DataCell(Text(
-                            data['improvements'],
                             style: TextStyle(fontSize: 18),
                           )),
                           DataCell(Row(

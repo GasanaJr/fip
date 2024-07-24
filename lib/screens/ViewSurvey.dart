@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:infra/screens/AdminDetailsScreen.dart';
-import 'package:infra/screens/DetailsScreen.dart';
+import 'package:infra/screens/SurveyDetails.dart';
+import 'package:infra/screens/SurveyScreen.dart';
 import 'package:infra/services/auth_service.dart';
 import 'package:provider/provider.dart';
 
@@ -125,25 +125,12 @@ class ViewSurvey extends StatelessWidget {
                                     context,
                                     MaterialPageRoute(
                                       // Add abstraction to the views ensuring the admins can update
-                                      builder: (context) => isAdmin
-                                          ? AdminDetailsScreen(
-                                              issueName: data['description'],
-                                              location: data['location'],
-                                              levelOfDamage:
-                                                  data['levelOfDamage'],
-                                              progress: data['progress'],
-                                              imageUrl: data['imageUrl'],
-                                              description: data['description'],
-                                              id: id,
-                                            )
-                                          : DetailsScreen(
-                                              issueName: data['description'],
-                                              location: data['location'],
-                                              levelOfDamage:
-                                                  data['levelOfDamage'],
-                                              progress: data['progress'],
-                                              imageUrl: data['imageUrl'],
-                                              description: data['description'],
+                                      builder: (context) => SurveyDetails(
+                                              satisfaction: data['satisfaction'],
+                                              responseTime: data['responseTime'],
+                                              communityInteraction:
+                                                  data['communityInteraction'],
+                                              improvements: data['improvements'],
                                             ),
                                     ),
                                   );

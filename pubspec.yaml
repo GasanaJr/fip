@@ -43,6 +43,8 @@ dependencies:
   http: 
   cloud_firestore:
   firebase_storage:
+  mockito:
+  firebase_auth_mocks:
 
 dev_dependencies:
   flutter_test:

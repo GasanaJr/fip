@@ -8,6 +8,7 @@ import 'package:infra/auth/login_or_register.dart';
 import 'package:infra/firebase_options.dart';
 import 'package:infra/helper/auth.dart';
 import 'package:infra/models/ReportedIssuesModel.dart';
+import 'package:infra/models/SurveysModel.dart';
 import 'package:infra/routes/routes.dart';
 import 'package:infra/screens/HomeScreen.dart';
 import 'package:infra/screens/ReportScreen.dart';
@@ -31,7 +32,12 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => ReportedIssuesModel(),
         ),
-        ChangeNotifierProvider(create: (context) => AuthService())
+        ChangeNotifierProvider(
+          create: (_) => SurveysModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => AuthService(),
+        )
       ],
       child: MaterialApp(
         theme: ThemeData(

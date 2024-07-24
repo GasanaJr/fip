@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:infra/components/ReportedIssueTile.dart';
 import 'package:infra/models/ReportedIssuesModel.dart';
 import 'package:infra/screens/Login.dart';
+import 'package:infra/screens/ViewSurvey.dart';
 import 'package:infra/services/auth_service.dart';
 import 'package:provider/provider.dart';
 import 'package:infra/routes/routes.dart';
@@ -22,6 +23,10 @@ class _HomeContentState extends State<HomeContent> {
   Widget build(BuildContext context) {
     final user = Provider.of<AuthService>(context).user;
     final displayName = user?.displayName ?? 'User';
+    var isAdmin = false;
+    if (user?.email == 'gasanajr08@gmail.com') {
+      isAdmin = true;
+    }
     return Scaffold(
       body: ListView(
         children: [
@@ -143,7 +148,15 @@ class _HomeContentState extends State<HomeContent> {
                                     borderRadius: BorderRadius.circular(35)),
                                 child: IconButton(
                                     onPressed: () {
-                                      Navigator.pushNamed(context, '/survey');
+                                      isAdmin
+                                          ? Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ViewSurvey(),
+                                              ))
+                                          : Navigator.pushNamed(
+                                              context, '/survey');
                                     },
                                     icon: Icon(
                                       Icons.feedback,
@@ -154,7 +167,7 @@ class _HomeContentState extends State<HomeContent> {
                                 height: 10,
                               ),
                               Text(
-                                "Take Survey",
+                                isAdmin ? "View Surveys" : "Take Survey",
                                 style: TextStyle(fontSize: 17),
                               )
                             ],

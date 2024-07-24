@@ -55,21 +55,14 @@ class SurveyDetails extends StatelessWidget {
                       SizedBox(
                         height: 20,
                       ),
-                      Text(satisfaction,
+                      Text("Customer Satisfaction: $satisfaction",
                           style: GoogleFonts.montserrat(
                               fontWeight: FontWeight.bold, fontSize: 20)),
                       SizedBox(
                         height: 10,
                       ),
                       Text(
-                        responseTime,
-                        style: GoogleFonts.montserrat(fontSize: 20),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                         communityInteraction,
+                        "Response Time: $responseTime",
                         style: GoogleFonts.montserrat(
                             fontWeight: FontWeight.bold, fontSize: 20),
                       ),
@@ -77,14 +70,21 @@ class SurveyDetails extends StatelessWidget {
                         height: 10,
                       ),
                       Text(
-                        improvements,
+                        "Community Interaction: $communityInteraction",
                         style: GoogleFonts.montserrat(
                             fontWeight: FontWeight.bold, fontSize: 20),
                       ),
                       SizedBox(
                         height: 10,
                       ),
-                
+                      Text(
+                        "Suggested Improvements: $improvements",
+                        style: GoogleFonts.montserrat(
+                            fontWeight: FontWeight.bold, fontSize: 20),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
                     ],
                   ),
                 ),

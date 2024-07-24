@@ -3,21 +3,12 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:infra/screens/SurveyDetails.dart';
-import 'package:infra/screens/SurveyScreen.dart';
-import 'package:infra/services/auth_service.dart';
-import 'package:provider/provider.dart';
 
 class ViewSurvey extends StatelessWidget {
   const ViewSurvey({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var isAdmin = false;
-    final user = Provider.of<AuthService>(context).user;
-    if (user?.email == 'gasanajr08@gmail.com') {
-      isAdmin = true;
-    }
-
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(70),
@@ -78,6 +69,12 @@ class ViewSurvey extends StatelessWidget {
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18,
                                   color: Colors.white))),
+                      DataColumn(
+                          label: Text('Actions',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: Colors.white))),
                     ],
                     rows: surveys.map((survey) {
                       var data = survey.data() as Map<String, dynamic>;
@@ -126,12 +123,12 @@ class ViewSurvey extends StatelessWidget {
                                     MaterialPageRoute(
                                       // Add abstraction to the views ensuring the admins can update
                                       builder: (context) => SurveyDetails(
-                                              satisfaction: data['satisfaction'],
-                                              responseTime: data['responseTime'],
-                                              communityInteraction:
-                                                  data['communityInteraction'],
-                                              improvements: data['improvements'],
-                                            ),
+                                        satisfaction: data['satisfaction'],
+                                        responseTime: data['responseTime'],
+                                        communityInteraction:
+                                            data['communityInteraction'],
+                                        improvements: data['improvements'],
+                                      ),
                                     ),
                                   );
                                 },

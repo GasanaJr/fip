@@ -5,14 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AdminDetailsScreen extends StatefulWidget {
-  final String issueName;
-  final String location;
-  final String levelOfDamage;
-  final String progress;
-  final String imageUrl;
-  final String description;
-  final String id;
+ final String issueName;       // Name of the issue
+  final String location;        // Location of the issue
+  final String levelOfDamage;   // Level of damage of the issue
+  final String progress;        // Progress status of the issue
+  final String imageUrl;        // Image URL associated with the issue
+  final String description;     // Description of the issue
+  final String id;              // Document ID of the issue in Firestore
 
+// Constructor for the AdminDetailsScreen
   const AdminDetailsScreen({
     super.key,
     required this.issueName,

@@ -1,10 +1,13 @@
 // ignore_for_file: prefer_const_constructors
+//this directive tells the dart analyzer to ignore the 'prefer_const_constructors'
 
 import 'package:flutter/material.dart';
 import 'package:infra/screens/Login.dart';
 import 'package:infra/screens/Register.dart';
 
+//This is the main widget that toogles between the login and register screens
 class LoginOrRegister extends StatefulWidget {
+
   const LoginOrRegister({super.key});
 
   @override

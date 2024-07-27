@@ -43,9 +43,14 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+//Cloud Function to send email verification OTP
 exports.sendEmailVerification = functions.https.onCall(
   async (data, context) => {
+
+    //Extract email from data object passed to the function
     const email = data.email;
+
+    //Generate a random 6-digit verification code(OTP)
     const verificationCode = Math.floor(100000 + Math.random() * 900000); // Generate OTP
 
     const mailOptions = {

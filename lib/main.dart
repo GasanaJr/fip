@@ -16,14 +16,12 @@ import 'package:infra/screens/ProfileScreens.dart';
 import 'package:infra/services/auth_service.dart';
 import 'package:provider/provider.dart';
 
-// The entry point of the application
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(MyApp());
 }
 
-// The main widget of the app
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -31,15 +29,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        // Provide ReportedIssuesModel
         ChangeNotifierProvider(
           create: (_) => ReportedIssuesModel(),
         ),
-        // Provide SurveysModel
         ChangeNotifierProvider(
           create: (_) => SurveysModel(),
         ),
-        // Provide AuthService
         ChangeNotifierProvider(
           create: (context) => AuthService(),
         )
@@ -49,14 +44,13 @@ class MyApp extends StatelessWidget {
             textTheme:
                 GoogleFonts.montserratTextTheme(Theme.of(context).textTheme)),
         debugShowCheckedModeBanner: false,
-        home: AuthPage(), // Home screen, depending on authentication status
-        routes: routes, // Define application routes
+        home: AuthPage(),
+        routes: routes,
       ),
     );
   }
 }
 
-// Home screen widget with navigation and logout functionality
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -65,23 +59,19 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _selectedIndex = 0; // Current selected tab index
-
-  // Logout user and navigate to login screen
+  int _selectedIndex = 0;
   void logOutUser() {
     FirebaseAuth.instance.signOut();
     Navigator.pushReplacement(
         context, MaterialPageRoute(builder: (context) => LoginOrRegister()));
   }
 
-  // List of widgets to display in the body based on the selected index
   static const List<Widget> _widgetOptions = <Widget>[
     HomeContent(),
     ReportScreen(),
     ProfileScreens(),
   ];
 
-  // Handle bottom navigation bar item tap
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -122,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   onPressed: () {},
                 ),
-                SizedBox(width: 16), // Space between icons
+                SizedBox(width: 16), // Add space between icons
                 IconButton(
                   icon: Icon(
                     Icons.logout,
@@ -157,15 +147,14 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-// Screen to display reported issues
 class IssuesScreen extends StatelessWidget {
   IssuesScreen({super.key});
   final List<String> issues = [
     'Pothole on Main St',
     'Broken Streetlight',
     'Graffiti on Wall',
-    'Missing Stop Sign',
-    'Faulty CCTV Camera'
+    'missing stop sign',
+    'faulty CCTV camera'
   ];
 
   @override
@@ -187,7 +176,6 @@ class IssuesScreen extends StatelessWidget {
   }
 }
 
-// Profile screen with user information
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
@@ -199,7 +187,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _locationController = TextEditingController();
-  bool _isUpdated = true; // Track if profile is updated or not
+  bool _isUpdated = true;
 
   @override
   Widget build(BuildContext context) {
@@ -211,17 +199,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Display user profile picture
               CircleAvatar(
                 radius: 50,
-                backgroundImage: AssetImage('profile_picture.avif'), // Profile picture path
+                backgroundImage: AssetImage(
+                    'profile_picture.avif'), // Add your profile picture here
               ),
               SizedBox(height: 16),
-              // Display or edit first name
               _isUpdated
                   ? Text(
                       'First Name: ${_firstNameController.text}',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     )
                   : TextField(
                       controller: _firstNameController,
@@ -231,11 +219,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
               SizedBox(height: 16),
-              // Display or edit last name
               _isUpdated
                   ? Text(
                       'Last Name: ${_lastNameController.text}',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     )
                   : TextField(
                       controller: _lastNameController,
@@ -245,11 +233,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
               SizedBox(height: 16),
-              // Display or edit location
               _isUpdated
                   ? Text(
                       'Location: ${_locationController.text}',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     )
                   : TextField(
                       controller: _locationController,
@@ -259,7 +247,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
               SizedBox(height: 16),
-              // Button to toggle between edit and update mode
               ElevatedButton(
                 onPressed: () {
                   setState(() {

@@ -84,6 +84,7 @@ class DashboardComponent extends StatelessWidget {
           ],
         ),
       ),
+      //floating action button to add a new order
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           // Add new order

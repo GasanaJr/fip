@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
+//a stateless widget that represents the dashboard of the app
 class DashboardComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
+      //AppBar provides the header fr the dashboard screen
       appBar: AppBar(
         title: Text('Dashboard'),
         backgroundColor: Colors.blue,
@@ -81,6 +84,7 @@ class DashboardComponent extends StatelessWidget {
           ],
         ),
       ),
+      //floating action button to add a new order
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           // Add new order

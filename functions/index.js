@@ -18,11 +18,20 @@
 //   response.send("Hello from Firebase!");
 // });
 
+// Import Firebase Functions SDK
 const functions = require("firebase-functions");
+
+//Import Firebase Admin SDK to access Firestone
 const admin = require("firebase-admin");
+
+//Import NodeMailer for sending emails
 const nodemailer = require("nodemailer");
+
+//Load environment variables from a .env file
 require("dotenv").config();
 
+
+//Initialize Firebase Admin SDK
 admin.initializeApp();
 
 // Nodemailer
@@ -34,11 +43,17 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+//Cloud Function to send email verification OTP
 exports.sendEmailVerification = functions.https.onCall(
   async (data, context) => {
+
+    //Extract email from data object passed to the function
     const email = data.email;
+
+    //Generate a random 6-digit verification code(OTP)
     const verificationCode = Math.floor(100000 + Math.random() * 900000); // Generate OTP
 
+    //define email options
     const mailOptions = {
       from: process.env.EMAIL,
       to: email,
@@ -46,6 +61,7 @@ exports.sendEmailVerification = functions.https.onCall(
       text: `Your verification code is ${verificationCode}`,
     };
 
+    //send the email using nodemailer
     await transporter.sendMail(mailOptions);
 
     // Store the code in the database or cache it with an expiration time
@@ -54,6 +70,7 @@ exports.sendEmailVerification = functions.https.onCall(
       timestamp: admin.firestore.FieldValue.serverTimestamp(),
     });
 
+    //return success response
     return { success: true };
   }
 );

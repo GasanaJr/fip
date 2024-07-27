@@ -18,11 +18,20 @@
 //   response.send("Hello from Firebase!");
 // });
 
+// Import Firebase Functions SDK
 const functions = require("firebase-functions");
+
+//Import Firebase Admin SDK to access Firestone
 const admin = require("firebase-admin");
+
+//Import NodeMailer for sending emails
 const nodemailer = require("nodemailer");
+
+//Load environment variables from a .env file
 require("dotenv").config();
 
+
+//Initialize Firebase Admin SDK
 admin.initializeApp();
 
 // Nodemailer

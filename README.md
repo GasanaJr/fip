@@ -59,6 +59,9 @@ For comprehensive guidance on Flutter development, check out the [online documen
 
 <img width="1383" alt="Screenshot 2024-07-27 at 3 13 37 PM" src="https://github.com/user-attachments/assets/64bf182d-b16a-45b1-8140-0bfaeb5dd408">
 
+## APK File
+The apk file can be found [here](https://drive.google.com/file/d/1l_O7DVqEG7uiwOUaas1cAQOQtuHVQZl-/view)
+
 ## Team
 
 - Kwihangana Dimitri
